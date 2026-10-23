@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './styles/tokens.css';
+@import './styles/app-shell.css';
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-ui);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow: hidden; /* Stop global scrolling */
+  font-size: 13px; /* Dense Native Base Size */
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-primary);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+/* Glassmorphism completely removed */
+.glass {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Common Layout Utilities */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  /* Without this a wide table inside makes the whole shell wider than the
+     screen instead of scrolling inside its own container. */
+  min-width: 0;
+}
+
+/* Dense page wrapper */
+.page-wrapper {
+  padding: 1rem 1.5rem;
+  max-width: none; /* Let it stretch natively */
+  width: 100%;
+  overflow-y: auto;
+  /* flex:1 rather than height:100% so the wrapper takes the room the header
+     leaves, instead of the full shell height plus the header's 56px — which
+     on a phone put the last rows of every list below the fold. */
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Forms and Inputs */
+/* Grid and flex children default to min-width:auto, which means they refuse to
+   shrink below their content's intrinsic width. Form controls carry a wide
+   intrinsic width, so a two- or three-column form grid inside a dialog grew
+   wider than the dialog itself: the modal gained a horizontal scrollbar and the
+   right-hand field was clipped out of view. Letting these shrink is what keeps
+   every field visible without scrolling sideways. */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  min-width: 0;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.input-field {
+  padding: 0.35rem 0.5rem; /* Highly compact */
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-input);
+  color: var(--text-primary);
+  font-size: 13px;
+  transition: border-color 0.1s ease;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Toggles are sized by the browser and must not be stretched to the cell. */
+.input-field[type='checkbox'],
+.input-field[type='radio'],
+input[type='checkbox'],
+input[type='radio'] {
+  width: auto;
+  min-width: 0;
+}
+
+/* A textarea's `cols` attribute sets a wide default width that would otherwise
+   reintroduce the same overflow. */
+textarea.input-field {
+  resize: vertical;
+}
+
+.input-field:focus {
+  border-color: var(--border-color-focus);
+  outline: 1px solid var(--border-color-focus); /* Sharp native outline */
+}
+
+select, select.input-field {
+  color-scheme: light dark;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding-right: 1.5rem;
+}
+
+[data-theme='dark'] select, [data-theme='dark'] select.input-field {
+  color-scheme: dark;
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+select option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] select option {
+  background-color: #252526;
+  color: #ffffff;
+}
+
+select option:disabled {
+  color: var(--text-muted);
+}
+
+/* Flat Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem; /* Native density */
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-secondary);
+}
+
+/* Structural Components */
+.card {
+  background-color: var(--bg-primary);
+  border-radius: 0; /* Flat panels */
+  border: none; /* We will use explicit borders when nesting */
+  padding: 0;
+  box-shadow: none; 
+}
+
+/* Animations simplified for speed */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.15s ease forwards;
+}

@@ -1,0 +1,269 @@
+/* Design tokens — the single vocabulary for the whole application.
+ *
+ * Imported first by index.css so every later rule can rely on these.
+ *
+ * The older --bg-*, --border-color and --radius-* names are kept as aliases:
+ * roughly two thousand call sites already use them, and re-pointing them here
+ * lets the system land without touching those files.
+ *
+ * Direction: light, soft and unhurried — the look of the consumer finance
+ * apps these users already carry in their pockets. A near-white ground,
+ * white cards with generous corners lifted off it by a hairline and a
+ * whisper of shadow, one clear blue for anything live, and figures set
+ * large and calm. Density is unchanged underneath: 13px body, 28px rows.
+ */
+
+:root {
+  /* ── Type families ────────────────────────────────────────────────────── */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ── Spacing — 4px grid ───────────────────────────────────────────────
+     Numeric rather than sm/md/lg so the eight improvised padding pairs in
+     the pages can be mapped onto it mechanically. */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 24px;
+  --space-8: 32px;
+
+  /* ── Type — named by role, because "is a table header size-300 or 400?"
+     is a question no page author should have to answer. Measured usage was
+     11px 410x, 12px 305x, 13px 120x, so 11 really is the caption and 13 the
+     body. Ten ad-hoc inline sizes collapse to these six. */
+  --font-caption: 11px;   /* status badge, helper text, tile footer */
+  --font-label: 12px;     /* field label, table header, tab label */
+  --font-body: 13px;      /* table cell, input value, button, nav — the base */
+  --font-section: 14px;   /* panel and section titles */
+  --font-title: 18px;     /* page title */
+  --font-metric: 24px;    /* KPI figure */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;     /* KPI figures only */
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;   /* app default — recovers ~1px per table row over 1.4 */
+  --leading-normal: 1.5;
+
+  /* ── Surfaces ─────────────────────────────────────────────────────────
+     A near-white ground with white cards lifted off it by a hairline border
+     and the faintest shadow. Hover tints toward the blue so it reads as
+     "you can click this"; the zebra stripe and the input fill are their own
+     colours so a table never looks interactive by accident. */
+  --surface-canvas: #f6f7f9;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f8f9fb;
+  --surface-input: #ffffff;
+  --surface-zebra: #fafbfc;
+  --surface-hover: #f3f6fb;
+  --surface-selected: #e8f0fe;
+  --surface-overlay: rgba(16, 24, 40, 0.45);
+
+  /* ── Text — ratios are against raised / sunken / canvas ─────────────── */
+  --text-primary: #101828;      /* 17.4 : 16.7 : 16.0 */
+  --text-secondary: #475467;    /*  7.6 :  7.3 :  7.0 */
+  --text-muted: #667085;        /*  4.8 :  4.6 :  4.4 — clears 4.5 on white */
+  --text-inverse: #ffffff;
+
+  /* ── Borders — three weights. --border-strong is the form-control
+     boundary and clears the 3:1 that WCAG 1.4.11 asks of a UI boundary. */
+  --border-subtle: #f0f2f5;     /* row separators, in-panel dividers */
+  --border-default: #e6e8ee;    /* card edge, table outline */
+  --border-strong: #98a2b3;     /* input border — 3.0:1 on white */
+  --border-focus: #2f6fe4;
+
+  --focus-ring: 0 0 0 4px rgba(47, 111, 228, 0.18);
+
+  /* ── Action colour ────────────────────────────────────────────────────
+     One clear blue. A text-safe cut for links and a fill cut for buttons. */
+  --accent-primary-text: #1d5fd6;         /* 5.9:1 on white */
+  --accent-primary-solid: #2f6fe4;
+  --accent-primary-solid-hover: #245fcd;
+
+  /* ── Status — six intents, one meaning each.
+     Colour marks a terminal verdict or a deviation from expected;
+     everything else is grey. Red lands on only three of twenty-five
+     states, so a red badge always means "this is dead, stop waiting". */
+  --status-neutral-fg: #475467;  --status-neutral-bg: #f2f4f7;  --status-neutral-border: #e4e7ec;
+  --status-info-fg: #1d5fd6;     --status-info-bg: #eaf1fe;     --status-info-border: #cfe0fc;
+  --status-progress-fg: #6941c6; --status-progress-bg: #f4f0ff; --status-progress-border: #e0d7fd;
+  --status-positive-fg: #067647; --status-positive-bg: #ecfdf3; --status-positive-border: #abefc6;
+  --status-caution-fg: #b54708;  --status-caution-bg: #fff6e5;  --status-caution-border: #fedf89;
+  --status-negative-fg: #b42318; --status-negative-bg: #fef3f2; --status-negative-border: #fecdca;
+
+  /* ── Navigation ───────────────────────────────────────────────────────
+     The menu sits on a ground one shade off the canvas; the current screen
+     is a white card lifted off it, the same way every card on the page is. */
+  --nav-bg: #fbfcfd;
+  --nav-bg-raised: #ffffff;
+  --nav-border: #eceff3;
+  --nav-text: #475467;
+  --nav-text-muted: #98a2b3;
+  --nav-hover: #f2f4f7;
+  --nav-active-bg: #ffffff;
+  --nav-active-text: #101828;
+  --nav-rail: #2f6fe4;
+
+  /* ── Aliases — keep existing call sites working ────────────────────────
+     --bg-primary is the ground and --bg-secondary the raised surface. */
+  --bg-primary: var(--surface-canvas);
+  --bg-secondary: var(--surface-raised);
+  --bg-tertiary: #f2f4f7;       /* disabled fills, subtle inner wells */
+  --border-color: var(--border-default);
+  --border-color-focus: var(--border-focus);
+
+  /* ── Identity + chart colours ───────────────────────────────────────── */
+  --accent-primary: #2f6fe4;
+  --accent-primary-hover: #245fcd;
+  --accent-success: #12b76a;
+  --accent-danger: #f04438;
+  --accent-warning: #f79009;
+  --accent-purple: #7a5af8;
+  --accent-teal: #0ea5e9;
+
+  /* Categorical series: one blue stepping lighter, then sky and violet.
+     Never used outside an <svg> or a legend. */
+  --chart-1: #2f6fe4;
+  --chart-2: #60a5fa;
+  --chart-3: #93c5fd;
+  --chart-4: #bfdbfe;
+  --chart-5: #0ea5e9;
+  --chart-6: #7a5af8;
+
+  /* Soft elevation: a card is a hairline plus the faintest shadow. The modal,
+     a popover and a toast are the only things that cast more. */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 20px 48px rgba(16, 24, 40, 0.16);
+
+  /* Generous corners: 8px on a badge or a control, 14px on a card. */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+}
+
+[data-theme='dark'] {
+  --surface-canvas: #0e1116;
+  --surface-raised: #161b22;
+  --surface-sunken: #1b212a;
+  --surface-input: #1d232d;
+  --surface-zebra: #191f27;
+  --surface-hover: #1c2535;
+  --surface-selected: #1b2a48;
+  --surface-overlay: rgba(0, 0, 0, 0.62);
+
+  --text-primary: #e3e8ef;
+  --text-secondary: #a6afbd;
+  --text-muted: #8790a0;
+  --text-inverse: #ffffff;
+
+  --border-subtle: #232b36;
+  --border-default: #2d3642;
+  --border-strong: #68737f;
+  --border-focus: #7d9bf5;
+
+  --focus-ring: 0 0 0 2px rgba(125, 155, 245, 0.42);
+
+  --accent-primary-text: #8ab4ff;
+  --accent-primary-solid: #3b7cf0;
+  --accent-primary-solid-hover: #5a90f3;
+
+  --status-neutral-fg: #a6afbd;  --status-neutral-bg: #212932;  --status-neutral-border: #313b47;
+  --status-info-fg: #8fa8f7;     --status-info-bg: #172140;     --status-info-border: #2a3a6b;
+  --status-progress-fg: #5fd0e8; --status-progress-bg: #0f2a33; --status-progress-border: #1c4b58;
+  --status-positive-fg: #4fcf85; --status-positive-bg: #0f2f1e; --status-positive-border: #1f5436;
+  --status-caution-fg: #f0b95a;  --status-caution-bg: #33240e;  --status-caution-border: #5c4318;
+  --status-negative-fg: #f47c88; --status-negative-bg: #3a1a20; --status-negative-border: #6b2f38;
+
+  --nav-bg: #12161c;
+  --nav-bg-raised: #171c24;
+  --nav-border: #242c37;
+  --nav-text: #a6afbd;
+  --nav-text-muted: #6b7686;
+  --nav-hover: #1b2129;
+  --nav-active-bg: #1f2632;
+  --nav-active-text: #ffffff;
+  --nav-rail: #7d9bf5;
+
+  --bg-tertiary: #242c37;
+
+  --accent-primary: #3b7cf0;
+  --accent-primary-hover: #5a90f3;
+  --accent-success: #4fcf85;
+  --accent-danger: #f47c88;
+  --accent-warning: #e6a441;
+  --accent-purple: #8f86e8;
+  --accent-teal: #3fb8d1;
+
+  --chart-1: #5a90f3;
+  --chart-2: #8ab4ff;
+  --chart-3: #b3cdff;
+  --chart-4: #d6e4ff;
+  --chart-5: #38bdf8;
+  --chart-6: #a78bfa;
+
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.60);
+}
+
+/* Figures line up column-to-column only with tabular figures, and this app is
+   mostly columns of figures. */
+td, .input-field, .metric, .money, .tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Monospace, for the odd place a code genuinely needs it. */
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Breakpoints ──────────────────────────────────────────────────────────
+   Written desktop-down, because this is a desktop application that has to
+   degrade gracefully rather than a mobile site that has to grow. */
+
+/* The login's brand panel is context, not content — below this width the
+   form deserves the whole screen. */
+@media (max-width: 900px) {
+  .login-brand { display: none !important; }
+}
+
+/* Login brand-panel machinery. A stamping press: the flywheel drives the ram
+   down onto a strip that feeds through, one punch per stroke. These live here
+   rather than inline so the global prefers-reduced-motion rule above stops them
+   for anyone who asks. One 2.4s cycle = one full flywheel turn = one stroke. */
+@keyframes press-flywheel { to { transform: rotate(360deg); } }
+@keyframes press-ram {
+  0%, 8%   { transform: translateY(0); }
+  50%      { transform: translateY(21px); }
+  92%, 100%{ transform: translateY(0); }
+}
+@keyframes press-spark {
+  0%, 46%  { opacity: 0; transform: scale(0.4); }
+  50%      { opacity: 1; transform: scale(1); }
+  60%, 100%{ opacity: 0; transform: scale(1.3); }
+}
+@keyframes press-feed {
+  /* strip advances only while the ram is clear of it (second half of the cycle) */
+  0%, 55%  { transform: translateX(0); }
+  95%, 100%{ transform: translateX(26px); }
+}

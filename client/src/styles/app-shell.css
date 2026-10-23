@@ -1,0 +1,428 @@
+/* Content-area presentation.
+ *
+ * The application was built at native/instrument density — 13px body, 2px
+ * corners, flat panels, borders instead of shadows. That is defensible for a
+ * planner scanning forty work orders, but it reads as unfinished next to the
+ * products these users already know, and it is the first thing anyone judges
+ * the system on.
+ *
+ * This raises the finish without giving up rows per screen: panels lift off a
+ * soft ground, corners round, controls grow to a comfortable size, and column
+ * headers step back so the data reads first.
+ *
+ * An earlier pass scoped all of this to .main-content so the navigation — a
+ * sibling of that element, not a child — could not be reached by it. That
+ * constraint has since been lifted deliberately: the surface inversion, the
+ * radii and the elevation scale now live in tokens.css and apply everywhere,
+ * sidebar included. What remains here is only presentation genuinely specific
+ * to the content area. */
+
+.main-content {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Page ─────────────────────────────────────────────────────────────── */
+
+.main-content .page-wrapper {
+  padding: 24px 28px 40px;
+}
+
+/* The page title and its explanation. Pages set these inline today; the rules
+   below only adjust rhythm, so a page that styles its own header still works. */
+.main-content .page-wrapper > div:first-child > h1,
+.main-content .page-wrapper h1 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  line-height: 1.25;
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────── */
+
+/* Pages draw their own panels inline with background, border and radius from
+   tokens, so lifting them is a matter of giving anything that already looks
+   like a panel a shadow and a softer edge. Matching on the token keeps this
+   from touching elements that merely share a colour. */
+.main-content [style*="--bg-secondary"],
+.main-content .panel {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-subtle) !important;
+}
+
+/* ── Tables ───────────────────────────────────────────────────────────── */
+
+.main-content table {
+  font-size: 14px;
+}
+
+/* Column headers step back: small, medium weight, quiet, so the row content
+   is what the eye lands on first. */
+.main-content thead th {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted) !important;
+  white-space: nowrap;
+}
+
+/* Rows get height without the cells being re-authored one by one. */
+.main-content tbody tr > td {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
+
+/* Vertical rules between cells are noise once rows have air around them. */
+.main-content tbody tr > td,
+.main-content thead th {
+  border-right: none !important;
+}
+
+/* A table cell was wrapping mid-phrase — "Rane (Madras) Ltd" broke across three
+   lines — because the browser's table layout shrinks columns to fit width
+   before it lets anything overflow. Every table here already sits in a
+   horizontally scrolling container (DataTable's CONTAINER_STYLE), so the fix
+   is to let cells claim their natural width and let that container do the
+   scrolling, rather than squeezing every column until its text folds. No cell
+   in the app relies on wrapping, so this is safe everywhere at once. */
+.main-content td,
+.main-content th {
+  white-space: nowrap;
+}
+
+.main-content tbody tr {
+  transition: background-color 0.12s ease;
+}
+
+/* Following a row across eight columns is the single most common thing anyone
+   does on these screens, and there was nothing tracking the cursor. */
+.main-content tbody tr:hover {
+  background-color: var(--surface-hover);
+}
+
+/* ── Controls ─────────────────────────────────────────────────────────── */
+
+.main-content .input-field {
+  padding: 8px 11px;
+  font-size: 14px;
+  border-radius: var(--radius-md);
+  border-color: var(--border-default);
+  background-color: var(--surface-input);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.main-content .input-field:hover:not(:focus):not(:disabled) {
+  border-color: var(--border-strong);
+}
+
+/* A ring rather than a hard outline — the same signal, less shout. */
+.main-content .input-field:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: var(--focus-ring);
+}
+
+.main-content .input-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.main-content .input-group {
+  margin-bottom: 16px;
+}
+
+.main-content .btn {
+  padding: 8px 15px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: background-color 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  /* Labels like "Add customer" were wrapping to two lines inside the button. */
+  white-space: nowrap;
+}
+
+.main-content .btn-primary { box-shadow: var(--shadow-sm); }
+.main-content .btn-primary:hover { box-shadow: var(--shadow-md); }
+
+.main-content .btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.main-content .btn-icon {
+  border-radius: var(--radius-md);
+  padding: 6px;
+  transition: background-color 0.12s ease;
+}
+
+.main-content .btn-icon:hover {
+  background-color: var(--surface-hover);
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+
+.main-content .tabs {
+  gap: 4px;
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .main-content *,
+  .main-content *::before,
+  .main-content *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ── Navigation ───────────────────────────────────────────────────────────
+   Deliberately global, not scoped to .main-content: the sidebar is a sibling
+   of that element. It reads the --nav-* set. NavLink applies `active` itself,
+   which is what keeps hover off the item you are already standing on — its
+   lifted card should not shift under the cursor. */
+
+.nav-item:hover:not(.active) {
+  background-color: var(--nav-hover) !important;
+  color: var(--nav-active-text) !important;
+}
+
+.nav-subitem:hover:not(.active) {
+  background-color: var(--nav-hover);
+  color: var(--nav-active-text) !important;
+}
+
+.nav-item:focus-visible,
+.nav-subitem:focus-visible,
+.nav-plain-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.nav-plain-btn:hover {
+  color: var(--nav-active-text) !important;
+  border-color: var(--nav-text-muted) !important;
+}
+
+/* A thin, quiet scrollbar on the menu. */
+.nav-scroll { scrollbar-width: thin; scrollbar-color: var(--border-default) transparent; }
+.nav-scroll::-webkit-scrollbar { width: 6px; }
+.nav-scroll::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 3px; }
+
+/* The header's search control and the screen palette it opens. */
+.search-trigger:hover { border-color: var(--border-default) !important; background: var(--surface-raised) !important; color: var(--text-secondary) !important; }
+.palette-item[data-active='true'], .palette-item:hover { background: var(--surface-hover); }
+.palette-item:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* Bordered icon button — the header's controls, and anywhere else a lone icon
+   needs to read as pressable rather than as decoration. */
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease;
+}
+
+.icon-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.icon-btn--danger:hover {
+  color: var(--accent-danger);
+  border-color: var(--status-negative-border);
+  background: var(--status-negative-bg);
+}
+
+/* Cards that lead somewhere should say so before you click them. */
+.stat-card--clickable {
+  transition: box-shadow .14s ease, transform .14s ease, border-color .14s ease;
+}
+
+.stat-card--clickable:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-default);
+  transform: translateY(-1px);
+}
+
+.stat-card--clickable:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────────
+   A report printed (or saved as PDF) is the page, not the application around
+   it: no menu, no toolbar, no buttons, panels unbroken across pages. */
+@media print {
+  .app-container > div:first-child, header, .report-toolbar { display: none !important; }
+  .app-container, .main-content, .page-wrapper { height: auto !important; overflow: visible !important; }
+  .page-wrapper { padding: 0 !important; }
+  body { background: #fff !important; }
+  .report-page section, .stat-card { break-inside: avoid; box-shadow: none !important; }
+}
+
+/* ── Phones ───────────────────────────────────────────────────────────────
+   The application is a desktop instrument panel that also has to work in a
+   hand on the shop floor: a store keeper checking a delivery at the gate, a
+   supervisor logging downtime at the press. Below 820px the menu becomes a
+   drawer (MainLayout), dialogs become bottom sheets (Modal) and lists become
+   cards (DataTable). What is left here is the spacing and the touch targets —
+   the parts that are the same on every screen. */
+@media (max-width: 820px) {
+  /* 100vw includes the scrollbar gutter on some browsers, which is enough to
+     make the whole page scroll sideways by a few pixels. */
+  .app-container { width: 100%; }
+
+  .main-content .page-wrapper,
+  .page-wrapper { padding: 14px 12px 40px; }
+
+  /* A page title sized for a 1440px screen takes three lines on a phone. */
+  .main-content .page-wrapper h1 { font-size: 19px; }
+  .main-content { font-size: 14px; }
+
+  /* Safari zooms the whole page when a focused input is under 16px, and the
+     user is then left panning around a form they cannot see the edges of. */
+  .main-content .input-field,
+  .input-field,
+  input, select, textarea { font-size: 16px !important; }
+
+  .main-content .input-field { padding: 10px 12px; }
+  .main-content .input-group { margin-bottom: 14px; }
+
+  /* A thumb is about 9mm across. 40px is the smallest target that is not a
+     game of chance; the buttons were 30px. */
+  .main-content .btn,
+  .btn { min-height: 40px; padding: 10px 16px; font-size: 14px; }
+  .main-content .btn-icon,
+  .btn-icon { min-width: 40px; min-height: 40px; }
+
+  /* The page header — title and explanation on the left, the page's main
+     button on the right — stacks, so the explanation is not squeezed into a
+     40-character column beside the button. Matched by :has() on the heading
+     rather than a class, because eighty pages build this header inline and
+     none of them share one. */
+  .page-wrapper div[style*="space-between"]:has(> h1),
+  .page-wrapper div[style*="space-between"]:has(> div > h1) {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 12px;
+  }
+
+  /* A tile that asks for two columns on a desktop grid has none to take. */
+  .page-wrapper [style*="grid-column"] { grid-column: auto !important; }
+
+  /* Every multi-column grid on every page becomes one column. On a phone a
+     two-column form is two half-width fields, and a six-column line editor is
+     six unreadable slivers. */
+  .page-wrapper [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+
+  /* A toolbar of buttons wraps onto as many lines as it needs rather than
+     pushing the last button off the screen. */
+  .report-toolbar { width: 100%; }
+  .report-toolbar > * { flex: 1 1 auto; }
+
+  /* Any row of buttons beside a page title does the same — two buttons that
+     do not fit put the second on its own line instead of off the screen. */
+  .page-wrapper div[style*="space-between"]:has(> h1) > div[style*="flex"],
+  .page-wrapper div[style*="space-between"]:has(> div > h1) > div[style*="flex"] {
+    flex-wrap: wrap;
+  }
+
+  /* Any table a page draws itself (not through DataTable) keeps its columns
+     rather than folding them, and scrolls inside its own box. */
+  .main-content table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* A form that scrolls inside a box that itself scrolls inside a sheet is
+     two scrollbars fighting over one thumb. Inside a dialog the sheet is the
+     only thing that scrolls — a panel of part lines grows to its full height
+     and the sheet carries it. */
+  .modal-body [style*="max-height"] { max-height: none !important; }
+
+  /* Tabs across the top of a screen scroll instead of wrapping into a block. */
+  .main-content .tabs { overflow-x: auto; flex-wrap: nowrap; }
+
+  /* Menu entries are 30px on a desktop, where a mouse hits them every time.
+     In the drawer they are what a thumb reaches for. */
+  .nav-item { min-height: 42px; }
+  .nav-subitem { min-height: 40px; display: flex !important; align-items: center; }
+
+  /* And every control on a page. A 14px icon button — a delete, a "enter
+     result", a chevron into a record — is a target a thumb misses more often
+     than it hits, and on these screens a miss can mean the wrong row. */
+  .page-wrapper button,
+  .page-wrapper [role="button"],
+  .page-wrapper select,
+  .page-wrapper input:not([type="checkbox"]):not([type="radio"]) { min-height: 38px; }
+
+}
+
+/* ── Tablets ──────────────────────────────────────────────────────────────
+   641–1024: the drawer, the sheets and the fingertip targets from the block
+   above still apply, but the data goes back into tables — an iPad has the
+   width for eight columns and a card per record wastes it. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .main-content .page-wrapper,
+  .page-wrapper { padding: 18px 20px 48px; }
+
+  /* Two columns of cards and fields, not one. The phone rule that forces a
+     single column is overridden here; a grid still collapses on its own when
+     its own minimum no longer fits. */
+  .page-wrapper [style*="grid-template-columns"] { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .page-wrapper [style*="grid-column"] { grid-column: auto !important; }
+
+  /* A table narrower than the screen still fills it; a wider one scrolls
+     inside its own frame rather than pushing the page sideways. */
+  .main-content table { display: table; white-space: normal; }
+  .main-content td, .main-content th { white-space: nowrap; }
+}
+
+/* ── Large screens ────────────────────────────────────────────────────────
+   Above about 1600 the work area is wider than anything is meant to be read
+   at: a paragraph runs past 200 characters and the eye loses the line on the
+   way back. Tables still take the whole width — that is what the width is
+   for — but prose and the panels that hold it are capped. */
+@media (min-width: 1600px) {
+  .main-content .page-wrapper { padding-inline: 40px; }
+
+  /* Explanatory text under a heading, and the plain-words strip on a report. */
+  .page-wrapper p,
+  .page-wrapper li { max-width: 105ch; }
+
+  /* Headline figures spread thin across a 2560px monitor and stop reading as
+     a row. Four across is the most that still scans as a group. */
+  .page-wrapper [style*="minmax(230px"],
+  .page-wrapper [style*="minmax(220px"] { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+}
+
+/* A monitor wider than this is almost always two windows side by side or an
+   ultrawide; centring keeps the menu and the work from being a screen apart. */
+@media (min-width: 2100px) {
+  .main-content .page-wrapper > * { max-width: 2000px; margin-inline: auto; width: 100%; }
+}
+
+/* ── Type floor, every screen ──────────────────────────────────────────────
+   tokens.css sets the caption at 11px and calls it the floor; a dozen tile
+   footers, badge labels and chart legends were written at 10px anyway. This
+   was a phone-only rule until a sweep at 1920px found the same twelve runs
+   just as small on a monitor. It applies everywhere now. */
+.page-wrapper [style*="font-size: 10px"],
+.page-wrapper [style*="font-size:10px"],
+.page-wrapper [style*="font-size: 10.5px"],
+.page-wrapper [style*="font-size:10.5px"] { font-size: 11.5px !important; }

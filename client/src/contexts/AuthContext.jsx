@@ -9,12 +9,8 @@ export const useAuth = () => useContext(AuthContext);
 export const getApiBaseUrl = () => {
   if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
   if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    if (window.location.hostname.includes('onrender.com')) {
-      const hostname = window.location.hostname;
-      if (hostname.includes('-frontend')) {
-        return `https://${hostname.replace('-frontend', '-backend')}/api`;
-      }
-      return `https://precision-autoparts-backend.onrender.com/api`;
+    if (window.location.hostname.includes('onrender.com') && window.location.hostname.includes('-frontend')) {
+      return `https://${window.location.hostname.replace('-frontend', '-backend')}/api`;
     }
     return `${window.location.origin}/api`;
   }

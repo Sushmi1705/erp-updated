@@ -1,0 +1,17 @@
+{
+  "name": "precision-auto-erp",
+  "version": "1.0.0",
+  "description": "Precision Auto Components Pvt Ltd - ERP System",
+  "main": "server/server.js",
+  "scripts": {
+    "build:client": "npm install --prefix client && npm run build --prefix client",
+    "build:server": "npm install --prefix server",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node server/server.js",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

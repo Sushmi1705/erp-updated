@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+const fs = require('fs');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
@@ -49,6 +51,7 @@ app.use(cors({
     if (
       process.env.NODE_ENV !== 'production' ||
       ALLOWED_ORIGINS.includes(origin) ||
+      /^https?:\/\/.*\.onrender\.com$/.test(origin) ||
       /^http:\/\/localhost:\d+$/.test(origin) ||
       /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)
     ) {
@@ -166,9 +169,24 @@ app.use('/api/dispatch', dispatchRoutes);
 app.use('/api/finance', financeRoutes);
 app.use('/api/issues', issueRoutes);
 
-// 404 Handler
-app.use((req, res, next) => {
+// Serve frontend client in production / unified hosting
+const clientDistPath = path.join(__dirname, '../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
+
+// 404 Handler for unhandled API routes
+app.use('/api', (req, res) => {
   res.status(404).json({ success: false, message: 'API endpoint not found' });
+});
+
+// Fallback 404 Handler
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: 'Endpoint not found' });
 });
 
 // Global Error Handler

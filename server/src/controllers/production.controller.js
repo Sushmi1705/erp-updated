@@ -906,28 +906,249 @@ exports.getV2PlanCapacityBreakdown = async (req, res) => {
 
 // ================= Work Order Management (V2 Architecture) =================
 
+const ensureDemoWorkOrders = async () => {
+  try {
+    const { Plant } = require('../models/CompanyStructure');
+    const { UOM } = require('../models/MasterUOM');
+
+    let plant = await Plant.findOne();
+    if (!plant) {
+      plant = await Plant.create({
+        name: 'LBAP Hosur Unit 1',
+        code: 'PLANT-HOSUR',
+        location: 'Hosur Industrial Area, Tamil Nadu',
+        status: 'Active'
+      });
+    }
+
+    let plans = await PlanHeader.find().limit(4);
+    if (!plans || plans.length === 0) {
+      await ensureDemoPlans();
+      plans = await PlanHeader.find().limit(4);
+    }
+
+    let materials = await Material.find({ status: { $ne: 'Inactive' } }).limit(10);
+    const defaultUom = (await UOM.findOne())?._id;
+
+    // Check if we need to seed
+    const existingCount = await WOHeader.countDocuments();
+    if (existingCount >= 6) {
+      // Ensure all existing WOs have at least 1 detail line
+      const allWos = await WOHeader.find();
+      for (const wo of allWos) {
+        const dCount = await WODetail.countDocuments({ WO_ID: wo._id });
+        if (dCount === 0) {
+          const mat = materials[Math.floor(Math.random() * materials.length)];
+          await WODetail.create({
+            WO_ID: wo._id,
+            Material_ID: mat._id,
+            Target_Quantity: 5000,
+            Produced_Quantity: wo.Status === 'Completed' || wo.Status === 'Closed' ? 5000 : (wo.Status === 'In Progress' ? 2250 : 0),
+            Scrapped_Quantity: wo.Status === 'Completed' || wo.Status === 'Closed' ? 62 : (wo.Status === 'In Progress' ? 28 : 0),
+            UOM_ID: defaultUom
+          });
+        }
+      }
+      return;
+    }
+
+    // Seed 10 realistic automotive work orders across all 5 shop-floor stages
+    const demoWos = [
+      {
+        num: 'WO-2026-4001',
+        planIdx: 0,
+        matIdx: 0,
+        target: 8500,
+        produced: 0,
+        scrap: 0,
+        status: 'Draft',
+        matStatus: 'Pending',
+        pct: 0
+      },
+      {
+        num: 'WO-2026-4002',
+        planIdx: 0,
+        matIdx: 1,
+        target: 6000,
+        produced: 0,
+        scrap: 0,
+        status: 'Draft',
+        matStatus: 'Pending',
+        pct: 0
+      },
+      {
+        num: 'WO-2026-4003',
+        planIdx: 1,
+        matIdx: 2,
+        target: 12000,
+        produced: 0,
+        scrap: 0,
+        status: 'Released',
+        matStatus: 'Allocated',
+        pct: 0
+      },
+      {
+        num: 'WO-2026-4004',
+        planIdx: 1,
+        matIdx: 3,
+        target: 7500,
+        produced: 0,
+        scrap: 0,
+        status: 'Released',
+        matStatus: 'Allocated',
+        pct: 0
+      },
+      {
+        num: 'WO-2026-4005',
+        planIdx: 2,
+        matIdx: 0,
+        target: 10000,
+        produced: 4200,
+        scrap: 48,
+        status: 'In Progress',
+        matStatus: 'Partially Consumed',
+        pct: 42,
+        startDaysAgo: 2
+      },
+      {
+        num: 'WO-2026-4006',
+        planIdx: 2,
+        matIdx: 4,
+        target: 5000,
+        produced: 3250,
+        scrap: 35,
+        status: 'In Progress',
+        matStatus: 'Partially Consumed',
+        pct: 65,
+        startDaysAgo: 1
+      },
+      {
+        num: 'WO-2026-4007',
+        planIdx: 3,
+        matIdx: 1,
+        target: 15000,
+        produced: 12750,
+        scrap: 110,
+        status: 'In Progress',
+        matStatus: 'Partially Consumed',
+        pct: 85,
+        startDaysAgo: 3
+      },
+      {
+        num: 'WO-2026-4008',
+        planIdx: 0,
+        matIdx: 2,
+        target: 9500,
+        produced: 9500,
+        scrap: 82,
+        status: 'Completed',
+        matStatus: 'Consumed',
+        pct: 100,
+        startDaysAgo: 4,
+        endDaysAgo: 1
+      },
+      {
+        num: 'WO-2026-4009',
+        planIdx: 1,
+        matIdx: 3,
+        target: 14000,
+        produced: 14000,
+        scrap: 135,
+        status: 'Completed',
+        matStatus: 'Consumed',
+        pct: 100,
+        startDaysAgo: 5,
+        endDaysAgo: 2
+      },
+      {
+        num: 'WO-2026-4010',
+        planIdx: 3,
+        matIdx: 4,
+        target: 8000,
+        produced: 8000,
+        scrap: 70,
+        status: 'Closed',
+        matStatus: 'Consumed',
+        pct: 100,
+        startDaysAgo: 7,
+        endDaysAgo: 3
+      }
+    ];
+
+    for (const item of demoWos) {
+      const plan = plans[item.planIdx % plans.length];
+      const mat = materials[item.matIdx % materials.length];
+      const startDate = item.startDaysAgo ? new Date(Date.now() - item.startDaysAgo * 86400000) : null;
+      const endDate = item.endDaysAgo ? new Date(Date.now() - item.endDaysAgo * 86400000) : null;
+
+      const [wo] = await WOHeader.create([{
+        WO_Number: item.num,
+        Source_Plan_ID: plan._id,
+        Plant_ID: plant._id,
+        Status: item.status,
+        Material_Status: item.matStatus,
+        Overall_Progress_Percentage: item.pct,
+        Actual_Start_Date: startDate,
+        Actual_End_Date: endDate
+      }]);
+
+      await WODetail.create([{
+        WO_ID: wo._id,
+        Material_ID: mat._id,
+        Target_Quantity: item.target,
+        Produced_Quantity: item.produced,
+        Scrapped_Quantity: item.scrap,
+        UOM_ID: defaultUom
+      }]);
+    }
+    console.log('✅ Auto-seeded 10 demo automotive Work Orders');
+  } catch (err) {
+    console.error('Error seeding demo work orders:', err.message);
+  }
+};
+
+exports.seedV2DemoWorkOrders = async (req, res) => {
+  try {
+    await WOHeader.deleteMany({});
+    await WODetail.deleteMany({});
+    await ensureDemoWorkOrders();
+    const count = await WOHeader.countDocuments();
+    res.json({ success: true, message: 'Sample automotive Work Orders generated across all shop-floor stages.', count });
+  } catch (error) {
+    handleError(res, error);
+  }
+};
+
 exports.getV2WorkOrders = async (req, res) => {
   try {
-    const { page = 1, limit = 20 } = req.query;
+    const totalExisting = await WOHeader.countDocuments();
+    if (totalExisting === 0) {
+      await ensureDemoWorkOrders();
+    }
+
+    const { page = 1, limit = 50, status, search } = req.query;
     const skip = (page - 1) * limit;
 
-    const headers = await WOHeader.find()
-      .populate('Source_Plan_ID', 'Plan_Number')
-      .populate('Plant_ID', 'name')
+    const query = {};
+    if (status && status !== 'All') query.Status = status;
+
+    const headers = await WOHeader.find(query)
+      .populate('Source_Plan_ID', 'Plan_Number Plan_Type Priority')
+      .populate('Plant_ID', 'name location')
       .sort({ createdAt: -1 })
-      .skip(skip).limit(limit);
+      .skip(skip).limit(Number(limit));
 
     // Fetch Details for each header
     const wos = await Promise.all(headers.map(async (h) => {
       const details = await WODetail.find({ WO_ID: h._id })
-        .populate('Material_ID', 'name code')
-        .populate('UOM_ID', 'name')
+        .populate('Material_ID', 'name code partNumber grade standardCost')
+        .populate('UOM_ID', 'name symbol')
         // Same as getV2Plans: the schema's ref:'BOM' is unregistered, and the field is revisionCode.
         .populate({ path: 'BOM_Revision_ID', model: 'BOMRevision', select: 'revisionCode' });
       return { ...h.toObject(), details };
     }));
 
-    const total = await WOHeader.countDocuments();
+    const total = await WOHeader.countDocuments(query);
     res.json({ success: true, pagination: { page, limit, total, pages: Math.ceil(total/limit) }, data: wos });
   } catch (error) { handleError(res, error); }
 };
@@ -1064,6 +1285,56 @@ exports.closeV2WorkOrder = async (req, res) => {
 
     await logAudit('UPDATE', 'WOHeader', header._id, req.user._id, 'Closed');
     res.json({ success: true, data: header, message: 'Work Order closed successfully' });
+  } catch (error) { handleError(res, error); }
+};
+
+exports.updateV2WorkOrderStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { Status } = req.body;
+    const allowed = ['Draft', 'Released', 'In Progress', 'Completed', 'Closed', 'Canceled'];
+    if (!allowed.includes(Status)) {
+      return res.status(400).json({ success: false, message: `Invalid status: ${Status}` });
+    }
+    const header = await WOHeader.findById(id);
+    if (!header) return res.status(404).json({ success: false, message: 'Work Order not found' });
+
+    if (Status === 'Closed' && header.Overall_Progress_Percentage < 100 && header.Status !== 'Completed') {
+      return res.status(400).json({ success: false, message: 'Work Order must be Completed before closing.' });
+    }
+
+    header.Status = Status;
+    if (Status === 'In Progress' && !header.Actual_Start_Date) header.Actual_Start_Date = new Date();
+    if (Status === 'Completed') {
+      header.Overall_Progress_Percentage = 100;
+      if (!header.Actual_End_Date) header.Actual_End_Date = new Date();
+      // Auto-set produced quantity on detail
+      const details = await WODetail.find({ WO_ID: id });
+      for (const d of details) {
+        if (d.Produced_Quantity < d.Target_Quantity) {
+          d.Produced_Quantity = d.Target_Quantity;
+          await d.save();
+        }
+      }
+    }
+    await header.save();
+    await logAudit('UPDATE', 'WOHeader', id, req.user._id, `Status updated to ${Status}`);
+    res.json({ success: true, data: header, message: `Work Order status updated to ${Status}` });
+  } catch (error) { handleError(res, error); }
+};
+
+exports.deleteV2WorkOrder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const header = await WOHeader.findById(id);
+    if (!header) return res.status(404).json({ success: false, message: 'Work Order not found' });
+    if (header.Status === 'Completed' || header.Status === 'Closed') {
+      return res.status(400).json({ success: false, message: 'Cannot delete completed or closed work orders.' });
+    }
+    await WODetail.deleteMany({ WO_ID: id });
+    await WOHeader.findByIdAndDelete(id);
+    await logAudit('DELETE', 'WOHeader', id, req.user._id, `Deleted Work Order ${header.WO_Number}`);
+    res.json({ success: true, message: `Work Order ${header.WO_Number} deleted successfully.` });
   } catch (error) { handleError(res, error); }
 };
 

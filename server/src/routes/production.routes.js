@@ -36,9 +36,12 @@ router.get('/v2/production-plan/:id/capacity', requirePermission('Production', '
 // Work Order Management V2 Architecture
 router.get('/v2/work-orders', requirePermission('Production', 'read'), productionController.getV2WorkOrders);
 router.post('/v2/work-orders/generate', requirePermission('Production', 'create'), productionController.createV2WorkOrder);
+router.post('/v2/work-orders/seed-dummy', requirePermission('Production', 'create'), productionController.seedV2DemoWorkOrders);
 router.put('/v2/work-orders/:id/progress', requirePermission('Production', 'update'), productionController.updateV2WorkOrderProgress);
 router.put('/v2/work-orders/:id/release', requirePermission('Production', 'update'), productionController.releaseV2WorkOrder);
+router.put('/v2/work-orders/:id/status', requirePermission('Production', 'update'), productionController.updateV2WorkOrderStatus);
 router.put('/v2/work-orders/:id/close', requirePermission('Production', 'update'), productionController.closeV2WorkOrder);
+router.delete('/v2/work-orders/:id', requirePermission('Production', 'delete'), productionController.deleteV2WorkOrder);
 
 // Material Allocation V2 Architecture
 router.get('/v2/material-allocation', requirePermission('Production', 'read'), productionController.getV2MaterialAllocations);

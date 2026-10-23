@@ -38,49 +38,48 @@ const WOTelemetryBar = ({ workOrders = [] }) => {
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-      gap: '12px',
-      marginBottom: '18px'
+      gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+      gap: '12px'
     }}>
       {/* 1. Total Job Travelers */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
-        borderLeft: '4px solid #f59e0b',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderLeft: '4px solid #d97706',
         borderRadius: '8px',
         padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Job Travelers
           </span>
-          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.12)', color: '#f59e0b' }}>
+          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: '#fef3c7', color: '#b45309' }}>
             <ClipboardList size={16} />
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <span style={{ fontSize: '24px', fontWeight: 700, color: '#f8fafc', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: '#0f172a', fontFamily: 'monospace' }}>
             {totalWos}
           </span>
-          <span style={{ fontSize: '11px', color: '#38bdf8', fontWeight: 500 }}>
-            {inProgressCount} active in cycle
+          <span style={{ fontSize: '11px', color: '#0284c7', fontWeight: 600 }}>
+            {inProgressCount} in cycle
           </span>
         </div>
         <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '2px' }}>
-          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#1e293b', color: '#94a3b8' }}>
+          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#f1f5f9', color: '#475569', fontWeight: 500 }}>
             Draft: {draftCount}
           </span>
-          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee' }}>
+          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#e0f2fe', color: '#0369a1', fontWeight: 500 }}>
             Rel: {releasedCount}
           </span>
-          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' }}>
+          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
             Run: {inProgressCount}
           </span>
-          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
+          <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', backgroundColor: '#dcfce7', color: '#166534', fontWeight: 600 }}>
             Done: {completedCount + closedCount}
           </span>
         </div>
@@ -88,35 +87,35 @@ const WOTelemetryBar = ({ workOrders = [] }) => {
 
       {/* 2. Target Production Batch */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
-        borderLeft: '4px solid #06b6d4',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderLeft: '4px solid #0284c7',
         borderRadius: '8px',
         padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Batch Target
           </span>
-          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: 'rgba(6, 182, 212, 0.12)', color: '#06b6d4' }}>
+          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: '#e0f2fe', color: '#0284c7' }}>
             <Target size={16} />
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <span style={{ fontSize: '24px', fontWeight: 700, color: '#f8fafc', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: '#0f172a', fontFamily: 'monospace' }}>
             {totalTarget.toLocaleString()}
           </span>
-          <span style={{ fontSize: '11px', color: '#94a3b8' }}>pcs</span>
+          <span style={{ fontSize: '11px', color: '#64748b' }}>pcs</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ flex: 1, height: '5px', backgroundColor: '#1e293b', borderRadius: '3px', overflow: 'hidden' }}>
-            <div style={{ width: `${Math.min(overallCompletionRate, 100)}%`, height: '100%', backgroundColor: '#06b6d4', transition: 'width 0.3s ease' }} />
+          <div style={{ flex: 1, height: '6px', backgroundColor: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
+            <div style={{ width: `${Math.min(overallCompletionRate, 100)}%`, height: '100%', backgroundColor: '#0284c7', transition: 'width 0.3s ease' }} />
           </div>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#22d3ee', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: '#0284c7', fontFamily: 'monospace' }}>
             {overallCompletionRate}%
           </span>
         </div>
@@ -124,97 +123,97 @@ const WOTelemetryBar = ({ workOrders = [] }) => {
 
       {/* 3. Actual Produced (Good Parts) */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
-        borderLeft: '4px solid #10b981',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderLeft: '4px solid #059669',
         borderRadius: '8px',
         padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Good Parts Produced
           </span>
-          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10b981' }}>
+          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: '#d1fae5', color: '#059669' }}>
             <CheckCircle2 size={16} />
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <span style={{ fontSize: '24px', fontWeight: 700, color: '#34d399', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: '#059669', fontFamily: 'monospace' }}>
             {totalProduced.toLocaleString()}
           </span>
-          <span style={{ fontSize: '11px', color: '#94a3b8' }}>booked</span>
+          <span style={{ fontSize: '11px', color: '#64748b' }}>booked</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#10b981' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#059669', fontWeight: 500 }}>
           <TrendingUp size={13} />
-          <span>First-time yield: <strong>{yieldRate}%</strong></span>
+          <span>First-time yield: <strong style={{ fontWeight: 700 }}>{yieldRate}%</strong></span>
         </div>
       </div>
 
       {/* 4. Scrap & Rejection PPM */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
-        borderLeft: '4px solid #f97316',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderLeft: '4px solid #ea580c',
         borderRadius: '8px',
         padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Scrap / Defects
           </span>
-          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: 'rgba(249, 115, 22, 0.12)', color: '#f97316' }}>
+          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: '#ffedd5', color: '#ea580c' }}>
             <AlertTriangle size={16} />
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <span style={{ fontSize: '24px', fontWeight: 700, color: '#fb923c', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: '#c2410c', fontFamily: 'monospace' }}>
             {totalScrap.toLocaleString()}
           </span>
-          <span style={{ fontSize: '11px', color: '#94a3b8' }}>spoilage pcs</span>
+          <span style={{ fontSize: '11px', color: '#64748b' }}>spoilage pcs</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#fb923c' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#c2410c', fontWeight: 500 }}>
           <Flame size={13} />
-          <span>Shop Defect Level: <strong>{ppmDefect} PPM</strong></span>
+          <span>Shop Defect Level: <strong style={{ fontWeight: 700 }}>{ppmDefect} PPM</strong></span>
         </div>
       </div>
 
       {/* 5. Shop Floor Cadence / Stroke Speed */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
-        borderLeft: '4px solid #a855f7',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderLeft: '4px solid #7c3aed',
         borderRadius: '8px',
         padding: '14px 16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Press Line Cadence
           </span>
-          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>
+          <div style={{ padding: '4px', borderRadius: '6px', backgroundColor: '#ede9fe', color: '#7c3aed' }}>
             <Gauge size={16} />
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-          <span style={{ fontSize: '24px', fontWeight: 700, color: '#c084fc', fontFamily: 'monospace' }}>
+          <span style={{ fontSize: '24px', fontWeight: 800, color: '#6d28d9', fontFamily: 'monospace' }}>
             28.4
           </span>
-          <span style={{ fontSize: '11px', color: '#94a3b8' }}>SPM (Strokes/min)</span>
+          <span style={{ fontSize: '11px', color: '#64748b' }}>SPM (Strokes/min)</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#c084fc' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#6d28d9', fontWeight: 500 }}>
           <Clock size={13} />
-          <span>Shift OEE: <strong>84.2%</strong> (Class A)</span>
+          <span>Shift OEE: <strong style={{ fontWeight: 700 }}>84.2%</strong> (Class A)</span>
         </div>
       </div>
     </div>

@@ -65,10 +65,10 @@ const WOTravelerMatrix = ({
             borderRadius: '4px',
             fontSize: '11px',
             fontWeight: 700,
-            backgroundColor: '#1e293b',
-            color: '#94a3b8',
-            border: '1px solid #334155',
-            letterSpacing: '0.03em'
+            backgroundColor: '#f1f5f9',
+            color: '#475569',
+            border: '1px solid #cbd5e1',
+            letterSpacing: '0.02em'
           }}>
             DRAFT
           </span>
@@ -80,10 +80,10 @@ const WOTravelerMatrix = ({
             borderRadius: '4px',
             fontSize: '11px',
             fontWeight: 700,
-            backgroundColor: 'rgba(6, 182, 212, 0.12)',
-            color: '#22d3ee',
-            border: '1px solid rgba(6, 182, 212, 0.3)',
-            letterSpacing: '0.03em'
+            backgroundColor: '#e0f2fe',
+            color: '#0369a1',
+            border: '1px solid #bae6fd',
+            letterSpacing: '0.02em'
           }}>
             RELEASED
           </span>
@@ -95,15 +95,15 @@ const WOTravelerMatrix = ({
             borderRadius: '4px',
             fontSize: '11px',
             fontWeight: 700,
-            backgroundColor: 'rgba(245, 158, 11, 0.15)',
-            color: '#fbbf24',
-            border: '1px solid rgba(245, 158, 11, 0.4)',
-            letterSpacing: '0.03em',
+            backgroundColor: '#fef3c7',
+            color: '#92400e',
+            border: '1px solid #fde68a',
+            letterSpacing: '0.02em',
             display: 'inline-flex',
             alignItems: 'center',
             gap: '5px'
           }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#f59e0b', display: 'inline-block', boxShadow: '0 0 6px #f59e0b' }} />
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#d97706', display: 'inline-block' }} />
             IN PROGRESS
           </span>
         );
@@ -114,10 +114,10 @@ const WOTravelerMatrix = ({
             borderRadius: '4px',
             fontSize: '11px',
             fontWeight: 700,
-            backgroundColor: 'rgba(16, 185, 129, 0.15)',
-            color: '#34d399',
-            border: '1px solid rgba(16, 185, 129, 0.4)',
-            letterSpacing: '0.03em'
+            backgroundColor: '#dcfce7',
+            color: '#166534',
+            border: '1px solid #bbf7d0',
+            letterSpacing: '0.02em'
           }}>
             COMPLETED
           </span>
@@ -129,17 +129,17 @@ const WOTravelerMatrix = ({
             borderRadius: '4px',
             fontSize: '11px',
             fontWeight: 700,
-            backgroundColor: 'rgba(100, 116, 139, 0.15)',
-            color: '#94a3b8',
-            border: '1px solid #334155',
-            letterSpacing: '0.03em'
+            backgroundColor: '#f1f5f9',
+            color: '#64748b',
+            border: '1px solid #e2e8f0',
+            letterSpacing: '0.02em'
           }}>
             CLOSED
           </span>
         );
       default:
         return (
-          <span style={{ padding: '3px 8px', borderRadius: '4px', fontSize: '11px', color: '#cbd5e1' }}>
+          <span style={{ padding: '3px 8px', borderRadius: '4px', fontSize: '11px', color: '#334155' }}>
             {status}
           </span>
         );
@@ -151,12 +151,12 @@ const WOTravelerMatrix = ({
       case 'Pending':
         return (
           <span style={{
-            fontSize: '10px',
-            padding: '2px 6px',
+            fontSize: '11px',
+            padding: '2px 8px',
             borderRadius: '4px',
-            backgroundColor: 'rgba(239, 68, 68, 0.12)',
-            color: '#f87171',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
+            backgroundColor: '#fee2e2',
+            color: '#991b1b',
+            border: '1px solid #fecaca',
             fontWeight: 600
           }}>
             Pending Staging
@@ -165,12 +165,12 @@ const WOTravelerMatrix = ({
       case 'Allocated':
         return (
           <span style={{
-            fontSize: '10px',
-            padding: '2px 6px',
+            fontSize: '11px',
+            padding: '2px 8px',
             borderRadius: '4px',
-            backgroundColor: 'rgba(6, 182, 212, 0.12)',
-            color: '#22d3ee',
-            border: '1px solid rgba(6, 182, 212, 0.3)',
+            backgroundColor: '#e0f2fe',
+            color: '#0369a1',
+            border: '1px solid #bae6fd',
             fontWeight: 600
           }}>
             Allocated / Staged
@@ -179,12 +179,12 @@ const WOTravelerMatrix = ({
       case 'Partially Consumed':
         return (
           <span style={{
-            fontSize: '10px',
-            padding: '2px 6px',
+            fontSize: '11px',
+            padding: '2px 8px',
             borderRadius: '4px',
-            backgroundColor: 'rgba(245, 158, 11, 0.12)',
-            color: '#fbbf24',
-            border: '1px solid rgba(245, 158, 11, 0.3)',
+            backgroundColor: '#fef3c7',
+            color: '#92400e',
+            border: '1px solid #fde68a',
             fontWeight: 600
           }}>
             Partial Consumed
@@ -193,36 +193,37 @@ const WOTravelerMatrix = ({
       case 'Consumed':
         return (
           <span style={{
-            fontSize: '10px',
-            padding: '2px 6px',
+            fontSize: '11px',
+            padding: '2px 8px',
             borderRadius: '4px',
-            backgroundColor: 'rgba(16, 185, 129, 0.12)',
-            color: '#34d399',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
+            backgroundColor: '#dcfce7',
+            color: '#166534',
+            border: '1px solid #bbf7d0',
             fontWeight: 600
           }}>
             100% Consumed
           </span>
         );
       default:
-        return <span style={{ fontSize: '10px', color: '#94a3b8' }}>{status || 'Pending'}</span>;
+        return <span style={{ fontSize: '11px', color: '#64748b' }}>{status || 'Pending'}</span>;
     }
   };
 
   return (
     <div style={{
-      backgroundColor: '#121722',
-      border: '1px solid #232d3f',
+      backgroundColor: '#ffffff',
+      border: '1px solid #e2e8f0',
       borderRadius: '8px',
       overflow: 'hidden',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
     }}>
       {/* Search & Filters Command Bar */}
       <div style={{
         padding: '12px 16px',
-        borderBottom: '1px solid #1e293b',
-        backgroundColor: '#161e2c',
+        borderBottom: '1px solid #e2e8f0',
+        backgroundColor: '#f8fafc',
         display: 'flex',
         flexWrap: 'wrap',
         gap: '12px',
@@ -236,12 +237,13 @@ const WOTravelerMatrix = ({
             alignItems: 'center',
             gap: '8px',
             padding: '6px 12px',
-            backgroundColor: '#0f141c',
-            border: '1px solid #232d3f',
+            backgroundColor: '#ffffff',
+            border: '1px solid #cbd5e1',
             borderRadius: '6px',
-            width: '100%'
+            width: '100%',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
           }}>
-            <Search size={15} color="#94a3b8" />
+            <Search size={15} color="#64748b" />
             <input
               type="text"
               placeholder="Search WO#, Plan#, Part name or code..."
@@ -250,7 +252,7 @@ const WOTravelerMatrix = ({
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#f8fafc',
+                color: '#0f172a',
                 fontSize: '12px',
                 width: '100%',
                 outline: 'none'
@@ -262,7 +264,7 @@ const WOTravelerMatrix = ({
         {/* Right: Stage Pills & Plant Filter */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           {/* Status Pills */}
-          <div style={{ display: 'flex', backgroundColor: '#0f141c', borderRadius: '6px', padding: '2px', border: '1px solid #232d3f' }}>
+          <div style={{ display: 'flex', backgroundColor: '#f1f5f9', borderRadius: '6px', padding: '2px', border: '1px solid #e2e8f0' }}>
             {['All', 'Draft', 'Released', 'In Progress', 'Completed', 'Closed'].map(st => (
               <button
                 key={st}
@@ -273,8 +275,8 @@ const WOTravelerMatrix = ({
                   border: 'none',
                   fontSize: '11px',
                   fontWeight: selectedStatus === st ? 700 : 500,
-                  backgroundColor: selectedStatus === st ? '#f59e0b' : 'transparent',
-                  color: selectedStatus === st ? '#0b0f17' : '#94a3b8',
+                  backgroundColor: selectedStatus === st ? '#d97706' : 'transparent',
+                  color: selectedStatus === st ? '#ffffff' : '#475569',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease'
                 }}
@@ -290,10 +292,10 @@ const WOTravelerMatrix = ({
             onChange={(e) => setSelectedPlant(e.target.value)}
             style={{
               padding: '6px 10px',
-              backgroundColor: '#0f141c',
-              border: '1px solid #232d3f',
+              backgroundColor: '#ffffff',
+              border: '1px solid #cbd5e1',
               borderRadius: '6px',
-              color: '#f8fafc',
+              color: '#0f172a',
               fontSize: '11px',
               outline: 'none'
             }}
@@ -308,9 +310,9 @@ const WOTravelerMatrix = ({
 
       {/* Main Table */}
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '12px' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
           <thead>
-            <tr style={{ backgroundColor: '#0d1117', color: '#94a3b8', borderBottom: '1px solid #1e293b' }}>
+            <tr style={{ backgroundColor: '#f8fafc', color: '#475569', borderBottom: '1px solid #e2e8f0' }}>
               <th style={{ width: '36px', padding: '10px 8px' }}></th>
               <th style={{ padding: '10px 12px', fontWeight: 600 }}>Work Order / Traveler</th>
               <th style={{ padding: '10px 12px', fontWeight: 600 }}>Source Plan</th>
@@ -324,9 +326,9 @@ const WOTravelerMatrix = ({
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={8} style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>
+                <td colSpan={8} style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
-                    <div style={{ width: '16px', height: '16px', border: '2px solid #f59e0b', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                    <div style={{ width: '16px', height: '16px', border: '2px solid #d97706', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                     Loading shop-floor job travelers...
                   </div>
                 </td>
@@ -334,10 +336,10 @@ const WOTravelerMatrix = ({
             ) : filteredWOs.length === 0 ? (
               <tr>
                 <td colSpan={8} style={{ padding: '48px', textAlign: 'center', color: '#64748b' }}>
-                  <Barcode size={32} style={{ margin: '0 auto 8px', opacity: 0.4 }} />
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#f1f5f9' }}>No Work Orders matching filter</div>
-                  <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
-                    Generate a new work order from an approved plan or press "Seed Demo Data" above.
+                  <Barcode size={32} style={{ margin: '0 auto 8px', opacity: 0.5, color: '#94a3b8' }} />
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>No Work Orders matching filter</div>
+                  <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
+                    Generate a new work order from an approved plan or press "Seed Sample Work Orders" above.
                   </div>
                 </td>
               </tr>
@@ -353,8 +355,8 @@ const WOTravelerMatrix = ({
                 return (
                   <React.Fragment key={wo._id}>
                     <tr style={{
-                      borderBottom: '1px solid #1e293b',
-                      backgroundColor: isExpanded ? 'rgba(245, 158, 11, 0.04)' : 'transparent',
+                      borderBottom: '1px solid #f1f5f9',
+                      backgroundColor: isExpanded ? '#fffbeb' : '#ffffff',
                       transition: 'background-color 0.15s ease'
                     }}>
                       {/* Expand Toggle */}
@@ -364,7 +366,7 @@ const WOTravelerMatrix = ({
                           style={{
                             background: 'transparent',
                             border: 'none',
-                            color: isExpanded ? '#f59e0b' : '#64748b',
+                            color: isExpanded ? '#d97706' : '#94a3b8',
                             cursor: 'pointer',
                             padding: '4px',
                             display: 'flex',
@@ -382,13 +384,13 @@ const WOTravelerMatrix = ({
                           <span style={{
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            color: '#f8fafc',
+                            color: '#0f172a',
                             fontSize: '13px'
                           }}>
                             {wo.WO_Number}
                           </span>
                         </div>
-                        <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
+                        <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
                           {wo.Plant_ID?.name || 'LBAP Hosur Unit 1'}
                         </div>
                       </td>
@@ -398,9 +400,9 @@ const WOTravelerMatrix = ({
                         <span style={{
                           fontFamily: 'monospace',
                           fontSize: '11px',
-                          color: '#38bdf8',
-                          fontWeight: 600,
-                          backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                          color: '#0369a1',
+                          fontWeight: 700,
+                          backgroundColor: '#e0f2fe',
                           padding: '2px 6px',
                           borderRadius: '4px'
                         }}>
@@ -410,10 +412,10 @@ const WOTravelerMatrix = ({
 
                       {/* Component / Material */}
                       <td style={{ padding: '10px 12px' }}>
-                        <div style={{ fontWeight: 600, color: '#f1f5f9' }}>
+                        <div style={{ fontWeight: 600, color: '#0f172a' }}>
                           {detail.Material_ID?.name || 'Brake Pedal Bracket Blank'}
                         </div>
-                        <div style={{ fontSize: '10px', color: '#64748b', fontFamily: 'monospace' }}>
+                        <div style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace' }}>
                           {detail.Material_ID?.code || 'MAT-BRK-01'} • {detail.Material_ID?.grade || 'IS 513 CR4'}
                         </div>
                       </td>
@@ -421,27 +423,27 @@ const WOTravelerMatrix = ({
                       {/* Progress & Output */}
                       <td style={{ padding: '10px 12px', minWidth: '180px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
-                          <span style={{ fontFamily: 'monospace', color: '#f8fafc', fontWeight: 600 }}>
+                          <span style={{ fontFamily: 'monospace', color: '#0f172a', fontWeight: 600 }}>
                             {producedQty.toLocaleString()} / {targetQty.toLocaleString()} pcs
                           </span>
                           <span style={{
                             fontWeight: 700,
-                            color: pct >= 100 ? '#34d399' : (pct > 0 ? '#fbbf24' : '#94a3b8'),
+                            color: pct >= 100 ? '#059669' : (pct > 0 ? '#d97706' : '#64748b'),
                             fontFamily: 'monospace'
                           }}>
                             {pct.toFixed(0)}%
                           </span>
                         </div>
-                        <div style={{ height: '5px', backgroundColor: '#1e293b', borderRadius: '3px', overflow: 'hidden' }}>
+                        <div style={{ height: '6px', backgroundColor: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
                           <div style={{
                             width: `${Math.min(pct, 100)}%`,
                             height: '100%',
-                            backgroundColor: pct >= 100 ? '#10b981' : (pct > 0 ? '#f59e0b' : '#334155'),
+                            backgroundColor: pct >= 100 ? '#059669' : (pct > 0 ? '#d97706' : '#cbd5e1'),
                             transition: 'width 0.3s ease'
                           }} />
                         </div>
                         {scrapQty > 0 && (
-                          <div style={{ fontSize: '10px', color: '#f97316', marginTop: '2px' }}>
+                          <div style={{ fontSize: '10px', color: '#c2410c', marginTop: '2px', fontWeight: 600 }}>
                             Scrap: {scrapQty} pcs ({((scrapQty / (producedQty || 1)) * 100).toFixed(1)}%)
                           </div>
                         )}
@@ -467,13 +469,13 @@ const WOTravelerMatrix = ({
                               disabled={busyId === `rel-${wo._id}`}
                               title="Release to Shop Floor"
                               style={{
-                                padding: '4px 8px',
+                                padding: '4px 10px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(6, 182, 212, 0.15)',
-                                border: '1px solid rgba(6, 182, 212, 0.4)',
-                                color: '#22d3ee',
+                                backgroundColor: '#e0f2fe',
+                                border: '1px solid #bae6fd',
+                                color: '#0369a1',
                                 fontSize: '11px',
-                                fontWeight: 600,
+                                fontWeight: 700,
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -490,13 +492,13 @@ const WOTravelerMatrix = ({
                               onClick={() => onUpdateProgress(wo)}
                               title="Log Produced Quantity"
                               style={{
-                                padding: '4px 8px',
+                                padding: '4px 10px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(245, 158, 11, 0.15)',
-                                border: '1px solid rgba(245, 158, 11, 0.4)',
-                                color: '#fbbf24',
+                                backgroundColor: '#fef3c7',
+                                border: '1px solid #fde68a',
+                                color: '#92400e',
                                 fontSize: '11px',
-                                fontWeight: 600,
+                                fontWeight: 700,
                                 cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -514,11 +516,11 @@ const WOTravelerMatrix = ({
                               disabled={busyId === `close-${wo._id}`}
                               title="Close Work Order (Lock Materials & Cost)"
                               style={{
-                                padding: '4px 8px',
+                                padding: '4px 10px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                                border: '1px solid rgba(16, 185, 129, 0.4)',
-                                color: '#34d399',
+                                backgroundColor: '#dcfce7',
+                                border: '1px solid #bbf7d0',
+                                color: '#166534',
                                 fontSize: '11px',
                                 fontWeight: 700,
                                 cursor: 'pointer',
@@ -537,11 +539,11 @@ const WOTravelerMatrix = ({
                               onClick={() => onAllocateMaterial(wo)}
                               title="Allocate Raw Material"
                               style={{
-                                padding: '4px 8px',
+                                padding: '4px 10px',
                                 borderRadius: '4px',
-                                backgroundColor: '#1e293b',
-                                border: '1px solid #334155',
-                                color: '#38bdf8',
+                                backgroundColor: '#ffffff',
+                                border: '1px solid #cbd5e1',
+                                color: '#0284c7',
                                 fontSize: '11px',
                                 fontWeight: 600,
                                 cursor: 'pointer',
@@ -561,9 +563,9 @@ const WOTravelerMatrix = ({
                             style={{
                               padding: '4px 8px',
                               borderRadius: '4px',
-                              backgroundColor: '#161e2c',
-                              border: '1px solid #232d3f',
-                              color: '#94a3b8',
+                              backgroundColor: '#ffffff',
+                              border: '1px solid #cbd5e1',
+                              color: '#475569',
                               fontSize: '11px',
                               cursor: 'pointer'
                             }}
@@ -581,7 +583,7 @@ const WOTravelerMatrix = ({
                                 borderRadius: '4px',
                                 backgroundColor: 'transparent',
                                 border: 'none',
-                                color: '#64748b',
+                                color: '#94a3b8',
                                 cursor: 'pointer'
                               }}
                             >
@@ -594,32 +596,33 @@ const WOTravelerMatrix = ({
 
                     {/* Expandable Routing & Picklist Drawer */}
                     {isExpanded && (
-                      <tr style={{ backgroundColor: '#0d1117' }}>
-                        <td colSpan={8} style={{ padding: '16px 20px', borderBottom: '1px solid #232d3f' }}>
-                          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.8fr', gap: '20px' }}>
+                      <tr style={{ backgroundColor: '#f8fafc' }}>
+                        <td colSpan={8} style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1.8fr', gap: '16px' }}>
                             {/* Left: Component BOM Picklist */}
                             <div style={{
-                              backgroundColor: '#121722',
-                              border: '1px solid #232d3f',
+                              backgroundColor: '#ffffff',
+                              border: '1px solid #e2e8f0',
                               borderRadius: '6px',
-                              padding: '12px'
+                              padding: '12px',
+                              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
                             }}>
-                              <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <div style={{ fontSize: '11px', fontWeight: 700, color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                 <Boxes size={14} />
                                 Component Picklist & Reservation
                               </div>
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '11px' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 8px', backgroundColor: '#161e2c', borderRadius: '4px' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 10px', backgroundColor: '#f8fafc', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
                                   <div>
-                                    <div style={{ fontWeight: 600, color: '#f8fafc' }}>{detail.Material_ID?.name || 'Raw Material Coil'}</div>
-                                    <div style={{ fontSize: '10px', color: '#64748b' }}>Bin: BAY-A-RACK-03 • Lot: COIL-2026-X81</div>
+                                    <div style={{ fontWeight: 600, color: '#0f172a' }}>{detail.Material_ID?.name || 'Raw Material Coil'}</div>
+                                    <div style={{ fontSize: '11px', color: '#64748b' }}>Bin: BAY-A-RACK-03 • Lot: COIL-2026-X81</div>
                                   </div>
                                   <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace' }}>{targetQty.toLocaleString()} pcs</div>
-                                    <div style={{ fontSize: '10px', color: '#10b981' }}>Staged & Verified</div>
+                                    <div style={{ fontWeight: 700, color: '#0369a1', fontFamily: 'monospace' }}>{targetQty.toLocaleString()} pcs</div>
+                                    <div style={{ fontSize: '11px', color: '#059669', fontWeight: 600 }}>Staged & Verified</div>
                                   </div>
                                 </div>
-                                <div style={{ fontSize: '10px', color: '#94a3b8', fontStyle: 'italic', marginTop: '2px' }}>
+                                <div style={{ fontSize: '11px', color: '#64748b', fontStyle: 'italic', marginTop: '2px' }}>
                                   * Raw material issue posted under inventory ledger automatically upon first press stroke.
                                 </div>
                               </div>
@@ -627,16 +630,17 @@ const WOTravelerMatrix = ({
 
                             {/* Right: 6-Stage Manufacturing Routing */}
                             <div style={{
-                              backgroundColor: '#121722',
-                              border: '1px solid #232d3f',
+                              backgroundColor: '#ffffff',
+                              border: '1px solid #e2e8f0',
                               borderRadius: '6px',
-                              padding: '12px'
+                              padding: '12px',
+                              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
                             }}>
-                              <div style={{ fontSize: '11px', fontWeight: 700, color: '#22d3ee', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <div style={{ fontSize: '11px', fontWeight: 700, color: '#0369a1', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                 <Cpu size={14} />
                                 IATF 16949 Operation Routing Flow
                               </div>
-                              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', fontSize: '10px' }}>
+                              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', fontSize: '11px' }}>
                                 {[
                                   { op: 'OP 10', title: 'Shear / Blanking', status: producedQty > 0 ? 'Done' : 'Ready' },
                                   { op: 'OP 20', title: 'Stamping 250T', status: producedQty > 0 ? 'Active' : 'Queued' },
@@ -650,17 +654,17 @@ const WOTravelerMatrix = ({
                                     style={{
                                       padding: '6px 8px',
                                       borderRadius: '4px',
-                                      backgroundColor: step.status === 'Done' || step.status === 'Certified' ? 'rgba(16, 185, 129, 0.1)' : (step.status === 'Active' ? 'rgba(245, 158, 11, 0.12)' : '#161e2c'),
-                                      border: `1px solid ${step.status === 'Done' || step.status === 'Certified' ? 'rgba(16, 185, 129, 0.3)' : (step.status === 'Active' ? 'rgba(245, 158, 11, 0.3)' : '#232d3f')}`
+                                      backgroundColor: step.status === 'Done' || step.status === 'Certified' ? '#ecfdf5' : (step.status === 'Active' ? '#fef3c7' : '#f8fafc'),
+                                      border: `1px solid ${step.status === 'Done' || step.status === 'Certified' ? '#a7f3d0' : (step.status === 'Active' ? '#fde68a' : '#e2e8f0')}`
                                     }}
                                   >
-                                    <div style={{ fontWeight: 700, color: '#f8fafc', fontFamily: 'monospace' }}>{step.op}</div>
-                                    <div style={{ color: '#cbd5e1', marginTop: '1px' }}>{step.title}</div>
+                                    <div style={{ fontWeight: 700, color: '#0f172a', fontFamily: 'monospace' }}>{step.op}</div>
+                                    <div style={{ color: '#475569', marginTop: '1px' }}>{step.title}</div>
                                     <div style={{
-                                      fontWeight: 600,
-                                      fontSize: '9px',
+                                      fontWeight: 700,
+                                      fontSize: '10px',
                                       marginTop: '2px',
-                                      color: step.status === 'Done' || step.status === 'Certified' ? '#34d399' : (step.status === 'Active' ? '#fbbf24' : '#64748b')
+                                      color: step.status === 'Done' || step.status === 'Certified' ? '#065f46' : (step.status === 'Active' ? '#92400e' : '#64748b')
                                     }}>
                                       {step.status}
                                     </div>

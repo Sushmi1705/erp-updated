@@ -202,14 +202,14 @@ const WorkOrderHub = () => {
       gap: '16px',
       paddingBottom: '24px'
     }}>
-      {/* Top Industrial Command Bar */}
+      {/* Top Header & Actions Bar */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'flex-start',
-        borderBottom: '1px solid #1e293b',
+        borderBottom: '1px solid #e2e8f0',
         paddingBottom: '16px',
-        marginBottom: '16px',
+        marginBottom: '4px',
         flexWrap: 'wrap',
         gap: '12px'
       }}>
@@ -221,10 +221,7 @@ const WorkOrderHub = () => {
               fontSize: '20px',
               fontWeight: 800,
               letterSpacing: '-0.02em',
-              color: '#f8fafc',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px'
+              color: '#0f172a'
             }}>
               Work Orders & Job Travelers
             </h1>
@@ -233,15 +230,15 @@ const WorkOrderHub = () => {
               fontWeight: 700,
               padding: '2px 8px',
               borderRadius: '4px',
-              backgroundColor: 'rgba(245, 158, 11, 0.15)',
-              color: '#fbbf24',
-              border: '1px solid rgba(245, 158, 11, 0.3)',
+              backgroundColor: '#fef3c7',
+              color: '#92400e',
+              border: '1px solid #fde68a',
               fontFamily: 'monospace'
             }}>
               IATF 16949 / ROUTING
             </span>
           </div>
-          <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#94a3b8' }}>
+          <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
             Shop-floor job travelers released to press lines, robotic cells, and paint bays with live cadence tracking.
           </p>
         </div>
@@ -253,20 +250,21 @@ const WorkOrderHub = () => {
             onClick={handleSeedDemoData}
             disabled={seeding}
             style={{
-              padding: '7px 12px',
+              padding: '7px 13px',
               borderRadius: '6px',
-              backgroundColor: '#161e2c',
-              border: '1px solid #334155',
-              color: '#38bdf8',
+              backgroundColor: '#ffffff',
+              border: '1px solid #cbd5e1',
+              color: '#0284c7',
               fontSize: '12px',
               fontWeight: 600,
               cursor: seeding ? 'not-allowed' : 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
             }}
           >
-            <Sparkles size={14} color="#38bdf8" />
+            <Sparkles size={14} color="#0284c7" />
             {seeding ? 'Seeding…' : 'Seed Sample Work Orders'}
           </button>
 
@@ -275,17 +273,18 @@ const WorkOrderHub = () => {
             onClick={() => { fetchWorkOrders(); fetchDependencies(); }}
             disabled={loading}
             style={{
-              padding: '7px 12px',
+              padding: '7px 13px',
               borderRadius: '6px',
-              backgroundColor: '#161e2c',
-              border: '1px solid #232d3f',
-              color: '#cbd5e1',
+              backgroundColor: '#ffffff',
+              border: '1px solid #cbd5e1',
+              color: '#475569',
               fontSize: '12px',
               fontWeight: 600,
               cursor: loading ? 'not-allowed' : 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
             }}
           >
             <RotateCw size={14} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
@@ -298,8 +297,8 @@ const WorkOrderHub = () => {
             style={{
               padding: '7px 16px',
               borderRadius: '6px',
-              backgroundColor: '#f59e0b',
-              color: '#0b0f17',
+              backgroundColor: '#d97706',
+              color: '#ffffff',
               border: 'none',
               fontSize: '12px',
               fontWeight: 700,
@@ -307,7 +306,7 @@ const WorkOrderHub = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              boxShadow: '0 4px 12px rgba(245, 158, 11, 0.25)'
+              boxShadow: '0 2px 6px rgba(217, 119, 6, 0.3)'
             }}
           >
             <Plus size={15} /> Add Work Order
@@ -321,18 +320,17 @@ const WorkOrderHub = () => {
       {/* Perspective Tabs Bar */}
       <div style={{
         display: 'flex',
-        borderBottom: '1px solid #1e293b',
-        marginBottom: '16px',
-        gap: '4px'
+        borderBottom: '1px solid #e2e8f0',
+        gap: '8px'
       }}>
         <button
           onClick={() => setActiveTab('matrix')}
           style={{
-            padding: '8px 16px',
+            padding: '9px 18px',
             background: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'matrix' ? '2px solid #f59e0b' : '2px solid transparent',
-            color: activeTab === 'matrix' ? '#fbbf24' : '#94a3b8',
+            borderBottom: activeTab === 'matrix' ? '2px solid #d97706' : '2px solid transparent',
+            color: activeTab === 'matrix' ? '#b45309' : '#64748b',
             fontSize: '13px',
             fontWeight: activeTab === 'matrix' ? 700 : 500,
             cursor: 'pointer',
@@ -348,11 +346,11 @@ const WorkOrderHub = () => {
         <button
           onClick={() => setActiveTab('kanban')}
           style={{
-            padding: '8px 16px',
+            padding: '9px 18px',
             background: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'kanban' ? '2px solid #f59e0b' : '2px solid transparent',
-            color: activeTab === 'kanban' ? '#fbbf24' : '#94a3b8',
+            borderBottom: activeTab === 'kanban' ? '2px solid #d97706' : '2px solid transparent',
+            color: activeTab === 'kanban' ? '#b45309' : '#64748b',
             fontSize: '13px',
             fontWeight: activeTab === 'kanban' ? 700 : 500,
             cursor: 'pointer',
@@ -368,11 +366,11 @@ const WorkOrderHub = () => {
         <button
           onClick={() => setActiveTab('machines')}
           style={{
-            padding: '8px 16px',
+            padding: '9px 18px',
             background: 'transparent',
             border: 'none',
-            borderBottom: activeTab === 'machines' ? '2px solid #f59e0b' : '2px solid transparent',
-            color: activeTab === 'machines' ? '#fbbf24' : '#94a3b8',
+            borderBottom: activeTab === 'machines' ? '2px solid #d97706' : '2px solid transparent',
+            color: activeTab === 'machines' ? '#b45309' : '#64748b',
             fontSize: '13px',
             fontWeight: activeTab === 'machines' ? 700 : 500,
             cursor: 'pointer',
@@ -387,7 +385,7 @@ const WorkOrderHub = () => {
       </div>
 
       {/* Main Perspective Content */}
-      <div style={{ flex: 1, minHeight: 0 }}>
+      <div style={{ minHeight: '400px' }}>
         {activeTab === 'matrix' && (
           <WOTravelerMatrix
             workOrders={workOrders}

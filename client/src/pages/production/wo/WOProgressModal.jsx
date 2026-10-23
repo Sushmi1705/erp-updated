@@ -59,8 +59,8 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      backdropFilter: 'blur(4px)',
+      backgroundColor: 'rgba(15, 23, 42, 0.45)',
+      backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -68,12 +68,12 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
       padding: '20px'
     }}>
       <div style={{
-        backgroundColor: '#0f141c',
-        border: '1px solid #f59e0b',
-        borderRadius: '12px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #cbd5e1',
+        borderRadius: '10px',
         width: '100%',
-        maxWidth: '540px',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(245, 158, 11, 0.15)',
+        maxWidth: '520px',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
@@ -81,8 +81,8 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
         {/* Modal Header */}
         <div style={{
           padding: '16px 20px',
-          borderBottom: '1px solid #1e293b',
-          backgroundColor: '#161e2c',
+          borderBottom: '1px solid #e2e8f0',
+          backgroundColor: '#f8fafc',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
@@ -92,8 +92,8 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              backgroundColor: 'rgba(245, 158, 11, 0.15)',
-              color: '#f59e0b',
+              backgroundColor: '#fef3c7',
+              color: '#d97706',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -101,10 +101,10 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
               <Target size={18} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#f8fafc' }}>
+              <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#0f172a' }}>
                 Log Produced Parts — {workOrder.WO_Number}
               </h3>
-              <p style={{ margin: 0, fontSize: '11px', color: '#94a3b8' }}>
+              <p style={{ margin: 0, fontSize: '11px', color: '#64748b' }}>
                 Automotive Shift Output Booking & Cycle Tally
               </p>
             </div>
@@ -128,8 +128,8 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
         <form onSubmit={handleSubmit} style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Target Part Spec Card */}
           <div style={{
-            backgroundColor: '#121824',
-            border: '1px solid #232d3f',
+            backgroundColor: '#f8fafc',
+            border: '1px solid #e2e8f0',
             borderRadius: '8px',
             padding: '12px 14px',
             display: 'grid',
@@ -137,20 +137,20 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
             gap: '10px'
           }}>
             <div>
-              <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Part Material</span>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#f1f5f9', marginTop: '2px' }}>
+              <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600 }}>Part Material</span>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginTop: '2px' }}>
                 {detail.Material_ID?.name || 'Automotive Component'}
               </div>
-              <div style={{ fontSize: '11px', color: '#38bdf8', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: '11px', color: '#0284c7', fontFamily: 'monospace', fontWeight: 600 }}>
                 {detail.Material_ID?.code || 'PART-AUTO'}
               </div>
             </div>
             <div>
-              <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Target Order Qty</span>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#f1f5f9', marginTop: '2px', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 600 }}>Target Order Qty</span>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px', fontFamily: 'monospace' }}>
                 {targetQty.toLocaleString()} pcs
               </div>
-              <div style={{ fontSize: '10px', color: '#10b981' }}>
+              <div style={{ fontSize: '10px', color: '#059669', fontWeight: 600 }}>
                 Max ceiling (+5%): {maxAllowed.toLocaleString()} pcs
               </div>
             </div>
@@ -158,24 +158,24 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
 
           {/* Current vs New Progress Comparison */}
           <div style={{
-            backgroundColor: '#121824',
-            border: '1px solid #232d3f',
+            backgroundColor: '#f8fafc',
+            border: '1px solid #e2e8f0',
             borderRadius: '8px',
             padding: '12px 14px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>Produced so far: <strong style={{ color: '#f8fafc', fontFamily: 'monospace' }}>{currentProduced.toLocaleString()} pcs</strong></span>
-              <span style={{ fontSize: '11px', color: '#22d3ee' }}>New Progress: <strong style={{ fontFamily: 'monospace' }}>{newProgressPct}%</strong></span>
+              <span style={{ fontSize: '11px', color: '#475569' }}>Produced so far: <strong style={{ color: '#0f172a', fontFamily: 'monospace' }}>{currentProduced.toLocaleString()} pcs</strong></span>
+              <span style={{ fontSize: '11px', color: '#0284c7', fontWeight: 600 }}>New Progress: <strong style={{ fontFamily: 'monospace' }}>{newProgressPct}%</strong></span>
             </div>
-            <div style={{ height: '8px', backgroundColor: '#1e293b', borderRadius: '4px', overflow: 'hidden', position: 'relative' }}>
+            <div style={{ height: '8px', backgroundColor: '#e2e8f0', borderRadius: '4px', overflow: 'hidden', position: 'relative' }}>
               <div style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 bottom: 0,
                 width: `${Math.min(targetQty > 0 ? (currentProduced / targetQty) * 100 : 0, 100)}%`,
-                backgroundColor: '#3b82f6',
-                opacity: 0.6
+                backgroundColor: '#94a3b8',
+                opacity: 0.5
               }} />
               <div style={{
                 position: 'absolute',
@@ -183,7 +183,7 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
                 left: 0,
                 bottom: 0,
                 width: `${Math.min(newProgressPct, 100)}%`,
-                backgroundColor: newProgressPct >= 100 ? '#10b981' : '#f59e0b',
+                backgroundColor: newProgressPct >= 100 ? '#059669' : '#d97706',
                 transition: 'width 0.2s ease'
               }} />
             </div>
@@ -191,7 +191,7 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
 
           {/* Input Field with Quick Increments */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontSize: '12px', fontWeight: 600, color: '#f8fafc' }}>
+            <label style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a' }}>
               Cumulative Produced Quantity (Total pieces made so far) *
             </label>
             <div style={{ display: 'flex', gap: '8px' }}>
@@ -203,12 +203,12 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
                 onChange={(e) => handleValChange(e.target.value)}
                 style={{
                   flex: 1,
-                  padding: '10px 14px',
-                  backgroundColor: '#161e2c',
-                  border: errorMsg ? '1px solid #ef4444' : '1px solid #f59e0b',
+                  padding: '9px 12px',
+                  backgroundColor: '#ffffff',
+                  border: errorMsg ? '1px solid #ef4444' : '1px solid #cbd5e1',
                   borderRadius: '6px',
-                  color: '#f8fafc',
-                  fontSize: '16px',
+                  color: '#0f172a',
+                  fontSize: '15px',
                   fontWeight: 700,
                   fontFamily: 'monospace',
                   outline: 'none'
@@ -221,10 +221,10 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
                 onClick={fillTarget}
                 style={{
                   padding: '0 16px',
-                  backgroundColor: '#1e293b',
-                  border: '1px solid #334155',
+                  backgroundColor: '#f1f5f9',
+                  border: '1px solid #cbd5e1',
                   borderRadius: '6px',
-                  color: '#38bdf8',
+                  color: '#0284c7',
                   fontSize: '12px',
                   fontWeight: 600,
                   cursor: 'pointer'
@@ -244,11 +244,11 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
                   style={{
                     padding: '4px 10px',
                     borderRadius: '4px',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                    border: '1px solid rgba(245, 158, 11, 0.3)',
-                    color: '#fbbf24',
+                    backgroundColor: '#fef3c7',
+                    border: '1px solid #fde68a',
+                    color: '#92400e',
                     fontSize: '11px',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     cursor: 'pointer'
                   }}
                 >
@@ -258,7 +258,7 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
             </div>
 
             {errorMsg ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#ef4444', fontSize: '11px', marginTop: '4px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#dc2626', fontSize: '11px', marginTop: '4px', fontWeight: 500 }}>
                 <AlertTriangle size={13} />
                 <span>{errorMsg}</span>
               </div>
@@ -275,8 +275,8 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
             justifyContent: 'flex-end',
             gap: '10px',
             marginTop: '8px',
-            borderTop: '1px solid #1e293b',
-            paddingTop: '16px'
+            borderTop: '1px solid #e2e8f0',
+            paddingTop: '14px'
           }}>
             <button
               type="button"
@@ -285,9 +285,9 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
               style={{
                 padding: '8px 16px',
                 borderRadius: '6px',
-                backgroundColor: '#1e293b',
-                border: '1px solid #334155',
-                color: '#cbd5e1',
+                backgroundColor: '#ffffff',
+                border: '1px solid #cbd5e1',
+                color: '#475569',
                 fontSize: '12px',
                 fontWeight: 600,
                 cursor: 'pointer'
@@ -301,16 +301,17 @@ const WOProgressModal = ({ isOpen, onClose, workOrder, onSubmit, busy }) => {
               style={{
                 padding: '8px 20px',
                 borderRadius: '6px',
-                backgroundColor: '#f59e0b',
+                backgroundColor: '#d97706',
                 border: 'none',
-                color: '#0b0f17',
+                color: '#ffffff',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: busy || !!errorMsg ? 'not-allowed' : 'pointer',
                 opacity: busy || !!errorMsg ? 0.6 : 1,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                boxShadow: '0 2px 4px rgba(217, 119, 6, 0.25)'
               }}
             >
               {busy ? 'Updating…' : (

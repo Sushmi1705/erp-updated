@@ -23,41 +23,41 @@ const WOKanbanBoard = ({
     {
       id: 'Draft',
       title: 'Tooling & Setup',
-      badgeColor: '#94a3b8',
-      bgColor: 'rgba(100, 116, 139, 0.08)',
-      borderColor: '#334155',
+      badgeColor: '#475569',
+      bgColor: '#f1f5f9',
+      borderColor: '#e2e8f0',
       hint: 'Awaiting die mounting & line setup'
     },
     {
       id: 'Released',
       title: 'Staged on Floor',
-      badgeColor: '#22d3ee',
-      bgColor: 'rgba(6, 182, 212, 0.08)',
-      borderColor: 'rgba(6, 182, 212, 0.3)',
+      badgeColor: '#0369a1',
+      bgColor: '#e0f2fe',
+      borderColor: '#bae6fd',
       hint: 'Raw coil staged at press bay'
     },
     {
       id: 'In Progress',
       title: 'Active In-Cycle',
-      badgeColor: '#fbbf24',
-      bgColor: 'rgba(245, 158, 11, 0.08)',
-      borderColor: 'rgba(245, 158, 11, 0.3)',
+      badgeColor: '#92400e',
+      bgColor: '#fef3c7',
+      borderColor: '#fde68a',
       hint: 'Strokes running, cadence live'
     },
     {
       id: 'Completed',
       title: 'Putaway Ready',
-      badgeColor: '#34d399',
-      bgColor: 'rgba(16, 185, 129, 0.08)',
-      borderColor: 'rgba(16, 185, 129, 0.3)',
+      badgeColor: '#166534',
+      bgColor: '#dcfce7',
+      borderColor: '#bbf7d0',
       hint: '100% produced, CMM passed'
     },
     {
       id: 'Closed',
       title: 'Cost Reconciled',
       badgeColor: '#64748b',
-      bgColor: 'rgba(30, 41, 59, 0.4)',
-      borderColor: '#1e293b',
+      bgColor: '#f8fafc',
+      borderColor: '#e2e8f0',
       hint: 'Audited & locked to General Ledger'
     }
   ];
@@ -66,7 +66,7 @@ const WOKanbanBoard = ({
     <div style={{
       display: 'grid',
       gridTemplateColumns: 'repeat(5, minmax(260px, 1fr))',
-      gap: '12px',
+      gap: '14px',
       overflowX: 'auto',
       paddingBottom: '12px'
     }}>
@@ -77,14 +77,15 @@ const WOKanbanBoard = ({
           <div
             key={col.id}
             style={{
-              backgroundColor: '#121722',
+              backgroundColor: '#f8fafc',
               border: `1px solid ${col.borderColor}`,
               borderRadius: '8px',
               display: 'flex',
               flexDirection: 'column',
               minHeight: '520px',
               maxHeight: '75vh',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
             }}
           >
             {/* Column Header */}
@@ -98,7 +99,7 @@ const WOKanbanBoard = ({
             }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc', letterSpacing: '0.02em' }}>
+                  <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.01em' }}>
                     {col.title}
                   </span>
                   <span style={{
@@ -106,14 +107,15 @@ const WOKanbanBoard = ({
                     fontWeight: 700,
                     padding: '1px 6px',
                     borderRadius: '10px',
-                    backgroundColor: '#0f141c',
+                    backgroundColor: '#ffffff',
                     color: col.badgeColor,
-                    fontFamily: 'monospace'
+                    fontFamily: 'monospace',
+                    border: '1px solid rgba(0,0,0,0.08)'
                   }}>
                     {colWOs.length}
                   </span>
                 </div>
-                <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
+                <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
                   {col.hint}
                 </div>
               </div>
@@ -130,9 +132,9 @@ const WOKanbanBoard = ({
             }}>
               {colWOs.length === 0 ? (
                 <div style={{
-                  padding: '30px 10px',
+                  padding: '36px 10px',
                   textAlign: 'center',
-                  color: '#64748b',
+                  color: '#94a3b8',
                   fontSize: '11px',
                   fontStyle: 'italic'
                 }}>
@@ -150,14 +152,14 @@ const WOKanbanBoard = ({
                     <div
                       key={wo._id}
                       style={{
-                        backgroundColor: '#161e2c',
-                        border: '1px solid #232d3f',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #e2e8f0',
                         borderRadius: '6px',
                         padding: '12px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '8px',
-                        boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+                        boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
                         transition: 'transform 0.1s ease, border-color 0.15s ease'
                       }}
                     >
@@ -167,17 +169,18 @@ const WOKanbanBoard = ({
                           fontFamily: 'monospace',
                           fontWeight: 700,
                           fontSize: '12px',
-                          color: '#f8fafc'
+                          color: '#0f172a'
                         }}>
                           {wo.WO_Number}
                         </span>
                         <span style={{
                           fontSize: '10px',
                           fontFamily: 'monospace',
-                          color: '#38bdf8',
-                          backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                          color: '#0369a1',
+                          backgroundColor: '#e0f2fe',
                           padding: '1px 5px',
-                          borderRadius: '3px'
+                          borderRadius: '3px',
+                          fontWeight: 600
                         }}>
                           {wo.Source_Plan_ID?.Plan_Number || 'PP-2026-01'}
                         </span>
@@ -185,7 +188,7 @@ const WOKanbanBoard = ({
 
                       {/* Part Name & Grade */}
                       <div>
-                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#f1f5f9' }}>
+                        <div style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a' }}>
                           {detail.Material_ID?.name || 'Automotive Component'}
                         </div>
                         <div style={{ fontSize: '10px', color: '#64748b', fontFamily: 'monospace' }}>
@@ -196,22 +199,22 @@ const WOKanbanBoard = ({
                       {/* Progress Gauge */}
                       <div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', marginBottom: '3px' }}>
-                          <span style={{ color: '#94a3b8', fontFamily: 'monospace' }}>
+                          <span style={{ color: '#64748b', fontFamily: 'monospace' }}>
                             {producedQty.toLocaleString()} / {targetQty.toLocaleString()} pcs
                           </span>
                           <span style={{
                             fontWeight: 700,
                             fontFamily: 'monospace',
-                            color: pct >= 100 ? '#34d399' : (pct > 0 ? '#fbbf24' : '#94a3b8')
+                            color: pct >= 100 ? '#059669' : (pct > 0 ? '#d97706' : '#64748b')
                           }}>
                             {pct.toFixed(0)}%
                           </span>
                         </div>
-                        <div style={{ height: '4px', backgroundColor: '#1e293b', borderRadius: '2px', overflow: 'hidden' }}>
+                        <div style={{ height: '5px', backgroundColor: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
                           <div style={{
                             width: `${Math.min(pct, 100)}%`,
                             height: '100%',
-                            backgroundColor: pct >= 100 ? '#10b981' : (pct > 0 ? '#f59e0b' : '#334155'),
+                            backgroundColor: pct >= 100 ? '#059669' : (pct > 0 ? '#d97706' : '#cbd5e1'),
                             transition: 'width 0.3s ease'
                           }} />
                         </div>
@@ -220,13 +223,13 @@ const WOKanbanBoard = ({
                       {/* Scrap or Material Pill */}
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '10px' }}>
                         <span style={{
-                          color: wo.Material_Status === 'Consumed' ? '#34d399' : (wo.Material_Status === 'Allocated' ? '#22d3ee' : '#fbbf24'),
+                          color: wo.Material_Status === 'Consumed' ? '#059669' : (wo.Material_Status === 'Allocated' ? '#0284c7' : '#d97706'),
                           fontWeight: 600
                         }}>
                           ● {wo.Material_Status || 'Pending'}
                         </span>
                         {scrapQty > 0 && (
-                          <span style={{ color: '#fb923c', fontWeight: 600 }}>
+                          <span style={{ color: '#c2410c', fontWeight: 600 }}>
                             {scrapQty} scrap
                           </span>
                         )}
@@ -237,7 +240,7 @@ const WOKanbanBoard = ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        borderTop: '1px solid #1e293b',
+                        borderTop: '1px solid #f1f5f9',
                         paddingTop: '8px',
                         marginTop: '4px'
                       }}>
@@ -247,12 +250,13 @@ const WOKanbanBoard = ({
                           style={{
                             background: 'transparent',
                             border: 'none',
-                            color: '#94a3b8',
+                            color: '#64748b',
                             fontSize: '11px',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '4px'
+                            gap: '4px',
+                            fontWeight: 500
                           }}
                         >
                           <FileText size={12} /> Traveler
@@ -265,9 +269,9 @@ const WOKanbanBoard = ({
                               style={{
                                 padding: '3px 8px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(6, 182, 212, 0.15)',
-                                border: '1px solid rgba(6, 182, 212, 0.3)',
-                                color: '#22d3ee',
+                                backgroundColor: '#e0f2fe',
+                                border: '1px solid #bae6fd',
+                                color: '#0369a1',
                                 fontSize: '10px',
                                 fontWeight: 700,
                                 cursor: 'pointer',
@@ -286,9 +290,9 @@ const WOKanbanBoard = ({
                               style={{
                                 padding: '3px 8px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(245, 158, 11, 0.15)',
-                                border: '1px solid rgba(245, 158, 11, 0.3)',
-                                color: '#fbbf24',
+                                backgroundColor: '#fef3c7',
+                                border: '1px solid #fde68a',
+                                color: '#92400e',
                                 fontSize: '10px',
                                 fontWeight: 700,
                                 cursor: 'pointer',
@@ -307,9 +311,9 @@ const WOKanbanBoard = ({
                               style={{
                                 padding: '3px 8px',
                                 borderRadius: '4px',
-                                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                                border: '1px solid rgba(16, 185, 129, 0.3)',
-                                color: '#34d399',
+                                backgroundColor: '#dcfce7',
+                                border: '1px solid #bbf7d0',
+                                color: '#166534',
                                 fontSize: '10px',
                                 fontWeight: 700,
                                 cursor: 'pointer',

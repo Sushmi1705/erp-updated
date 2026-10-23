@@ -124,8 +124,8 @@ const WOCreateModal = ({
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      backdropFilter: 'blur(4px)',
+      backgroundColor: 'rgba(15, 23, 42, 0.45)',
+      backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -133,13 +133,13 @@ const WOCreateModal = ({
       padding: '20px'
     }}>
       <div style={{
-        backgroundColor: '#0f141c',
-        border: '1px solid #f59e0b',
-        borderRadius: '12px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #cbd5e1',
+        borderRadius: '10px',
         width: '100%',
         maxWidth: '680px',
         maxHeight: '90vh',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(245, 158, 11, 0.15)',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
@@ -147,8 +147,8 @@ const WOCreateModal = ({
         {/* Header */}
         <div style={{
           padding: '16px 20px',
-          borderBottom: '1px solid #1e293b',
-          backgroundColor: '#161e2c',
+          borderBottom: '1px solid #e2e8f0',
+          backgroundColor: '#f8fafc',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
@@ -158,8 +158,8 @@ const WOCreateModal = ({
               width: '32px',
               height: '32px',
               borderRadius: '8px',
-              backgroundColor: 'rgba(245, 158, 11, 0.15)',
-              color: '#f59e0b',
+              backgroundColor: '#fef3c7',
+              color: '#d97706',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -167,10 +167,10 @@ const WOCreateModal = ({
               <Plus size={18} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#f8fafc' }}>
+              <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#0f172a' }}>
                 Release New Work Order (Job Traveler)
               </h3>
-              <p style={{ margin: 0, fontSize: '11px', color: '#94a3b8' }}>
+              <p style={{ margin: 0, fontSize: '11px', color: '#64748b' }}>
                 Generate shop-floor traveler from an Approved Production Plan
               </p>
             </div>
@@ -195,13 +195,14 @@ const WOCreateModal = ({
             <div style={{
               padding: '10px 14px',
               borderRadius: '6px',
-              backgroundColor: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              color: '#fca5a5',
+              backgroundColor: '#fee2e2',
+              border: '1px solid #fecaca',
+              color: '#b91c1c',
               fontSize: '12px',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '8px',
+              fontWeight: 500
             }}>
               <AlertCircle size={16} />
               <span>{errorMsg}</span>
@@ -211,7 +212,7 @@ const WOCreateModal = ({
           {/* Plan & Plant Selectors */}
           <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '12px' }}>
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <label style={{ fontSize: '11px', fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Source Production Plan *
               </label>
               <select
@@ -222,10 +223,10 @@ const WOCreateModal = ({
                   width: '100%',
                   marginTop: '4px',
                   padding: '9px 12px',
-                  backgroundColor: '#161e2c',
-                  border: '1px solid #232d3f',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #cbd5e1',
                   borderRadius: '6px',
-                  color: '#f8fafc',
+                  color: '#0f172a',
                   fontSize: '12px',
                   outline: 'none'
                 }}
@@ -238,14 +239,14 @@ const WOCreateModal = ({
                 ))}
               </select>
               {productionPlans.length === 0 && (
-                <div style={{ fontSize: '10px', color: '#f59e0b', marginTop: '4px' }}>
+                <div style={{ fontSize: '11px', color: '#d97706', marginTop: '4px', fontWeight: 500 }}>
                   No approved plans found. Create one under Production → Production Plan.
                 </div>
               )}
             </div>
 
             <div>
-              <label style={{ fontSize: '11px', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <label style={{ fontSize: '11px', fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Manufacturing Plant *
               </label>
               <select
@@ -256,10 +257,10 @@ const WOCreateModal = ({
                   width: '100%',
                   marginTop: '4px',
                   padding: '9px 12px',
-                  backgroundColor: '#161e2c',
-                  border: '1px solid #232d3f',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #cbd5e1',
                   borderRadius: '6px',
-                  color: '#f8fafc',
+                  color: '#0f172a',
                   fontSize: '12px',
                   outline: 'none'
                 }}
@@ -278,11 +279,11 @@ const WOCreateModal = ({
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderBottom: '1px solid #1e293b',
+              borderBottom: '1px solid #e2e8f0',
               paddingBottom: '8px',
               marginBottom: '12px'
             }}>
-              <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Job Traveler Part Lines
               </span>
               <button
@@ -293,12 +294,12 @@ const WOCreateModal = ({
                   alignItems: 'center',
                   gap: '4px',
                   padding: '4px 10px',
-                  backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  backgroundColor: '#fef3c7',
+                  border: '1px solid #fde68a',
                   borderRadius: '4px',
-                  color: '#fbbf24',
+                  color: '#92400e',
                   fontSize: '11px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   cursor: 'pointer'
                 }}
               >
@@ -311,8 +312,8 @@ const WOCreateModal = ({
                 <div
                   key={idx}
                   style={{
-                    backgroundColor: '#121722',
-                    border: '1px solid #232d3f',
+                    backgroundColor: '#f8fafc',
+                    border: '1px solid #e2e8f0',
                     borderRadius: '6px',
                     padding: '10px 12px',
                     display: 'grid',
@@ -331,10 +332,10 @@ const WOCreateModal = ({
                         width: '100%',
                         marginTop: '2px',
                         padding: '6px 8px',
-                        backgroundColor: '#161e2c',
-                        border: '1px solid #334155',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #cbd5e1',
                         borderRadius: '4px',
-                        color: '#f8fafc',
+                        color: '#0f172a',
                         fontSize: '12px'
                       }}
                     >
@@ -359,12 +360,12 @@ const WOCreateModal = ({
                         width: '100%',
                         marginTop: '2px',
                         padding: '6px 8px',
-                        backgroundColor: '#161e2c',
-                        border: '1px solid #334155',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #cbd5e1',
                         borderRadius: '4px',
-                        color: '#f8fafc',
+                        color: '#0f172a',
                         fontSize: '12px',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         fontFamily: 'monospace'
                       }}
                     />
@@ -379,7 +380,7 @@ const WOCreateModal = ({
                         padding: '6px',
                         backgroundColor: 'transparent',
                         border: 'none',
-                        color: formData.details.length <= 1 ? '#334155' : '#ef4444',
+                        color: formData.details.length <= 1 ? '#cbd5e1' : '#dc2626',
                         cursor: formData.details.length <= 1 ? 'not-allowed' : 'pointer',
                         borderRadius: '4px'
                       }}
@@ -396,13 +397,14 @@ const WOCreateModal = ({
           <div style={{
             padding: '10px 12px',
             borderRadius: '6px',
-            backgroundColor: 'rgba(6, 182, 212, 0.08)',
-            border: '1px solid rgba(6, 182, 212, 0.25)',
-            color: '#22d3ee',
+            backgroundColor: '#e0f2fe',
+            border: '1px solid #bae6fd',
+            color: '#0369a1',
             fontSize: '11px',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px'
+            gap: '8px',
+            fontWeight: 500
           }}>
             <FileText size={15} />
             <span>
@@ -415,7 +417,7 @@ const WOCreateModal = ({
             display: 'flex',
             justifyContent: 'flex-end',
             gap: '10px',
-            borderTop: '1px solid #1e293b',
+            borderTop: '1px solid #e2e8f0',
             paddingTop: '14px'
           }}>
             <button
@@ -425,9 +427,9 @@ const WOCreateModal = ({
               style={{
                 padding: '8px 16px',
                 borderRadius: '6px',
-                backgroundColor: '#1e293b',
-                border: '1px solid #334155',
-                color: '#cbd5e1',
+                backgroundColor: '#ffffff',
+                border: '1px solid #cbd5e1',
+                color: '#475569',
                 fontSize: '12px',
                 fontWeight: 600,
                 cursor: 'pointer'
@@ -441,16 +443,17 @@ const WOCreateModal = ({
               style={{
                 padding: '8px 20px',
                 borderRadius: '6px',
-                backgroundColor: '#f59e0b',
+                backgroundColor: '#d97706',
                 border: 'none',
-                color: '#0b0f17',
+                color: '#ffffff',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: busy || !formData.Source_Plan_ID ? 'not-allowed' : 'pointer',
                 opacity: busy || !formData.Source_Plan_ID ? 0.6 : 1,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                boxShadow: '0 2px 4px rgba(217, 119, 6, 0.25)'
               }}
             >
               {busy ? 'Generating…' : (

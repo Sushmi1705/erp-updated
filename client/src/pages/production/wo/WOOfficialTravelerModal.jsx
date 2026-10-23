@@ -91,8 +91,8 @@ const WOOfficialTravelerModal = ({ isOpen, onClose, workOrder }) => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      backdropFilter: 'blur(5px)',
+      backgroundColor: 'rgba(15, 23, 42, 0.5)',
+      backdropFilter: 'blur(3px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -100,13 +100,13 @@ const WOOfficialTravelerModal = ({ isOpen, onClose, workOrder }) => {
       padding: '20px'
     }}>
       <div style={{
-        backgroundColor: '#0f141c',
-        border: '1px solid #334155',
-        borderRadius: '12px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #cbd5e1',
+        borderRadius: '10px',
         width: '100%',
         maxWidth: '850px',
         maxHeight: '92vh',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden'
@@ -114,15 +114,15 @@ const WOOfficialTravelerModal = ({ isOpen, onClose, workOrder }) => {
         {/* Modal Top Bar */}
         <div style={{
           padding: '12px 20px',
-          borderBottom: '1px solid #1e293b',
-          backgroundColor: '#161e2c',
+          borderBottom: '1px solid #e2e8f0',
+          backgroundColor: '#f8fafc',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FileText size={18} color="#f59e0b" />
-            <span style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc' }}>
+            <FileText size={18} color="#d97706" />
+            <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>
               Official Shop Floor Traveler Sheet — IATF 16949 / ISO 9001
             </span>
           </div>
@@ -134,13 +134,14 @@ const WOOfficialTravelerModal = ({ isOpen, onClose, workOrder }) => {
                 alignItems: 'center',
                 gap: '6px',
                 padding: '6px 14px',
-                backgroundColor: '#f59e0b',
-                color: '#0b0f17',
+                backgroundColor: '#d97706',
+                color: '#ffffff',
                 border: 'none',
                 borderRadius: '6px',
                 fontSize: '12px',
                 fontWeight: 700,
-                cursor: 'pointer'
+                cursor: 'pointer',
+                boxShadow: '0 1px 3px rgba(217, 119, 6, 0.3)'
               }}
             >
               <Printer size={14} /> Print Traveler
@@ -224,7 +225,7 @@ const WOOfficialTravelerModal = ({ isOpen, onClose, workOrder }) => {
             <div>
               <span style={{ color: '#64748b', fontSize: '10px', textTransform: 'uppercase', fontWeight: 600 }}>Component / Part</span>
               <div style={{ fontWeight: 700, color: '#0f172a', marginTop: '2px' }}>{matName}</div>
-              <div style={{ fontFamily: 'monospace', color: '#0284c7' }}>{matCode}</div>
+              <div style={{ fontFamily: 'monospace', color: '#0284c7', fontWeight: 600 }}>{matCode}</div>
             </div>
             <div>
               <span style={{ color: '#64748b', fontSize: '10px', textTransform: 'uppercase', fontWeight: 600 }}>Raw Material Grade</span>

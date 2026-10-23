@@ -88,24 +88,25 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {/* Header Banner */}
       <div style={{
-        backgroundColor: '#121722',
-        border: '1px solid #232d3f',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
         borderRadius: '8px',
         padding: '14px 18px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
-        gap: '12px'
+        gap: '12px',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Activity size={18} color="#f59e0b" />
-            <span style={{ fontSize: '14px', fontWeight: 700, color: '#f8fafc' }}>
+            <Activity size={18} color="#d97706" />
+            <span style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a' }}>
               Live Shop Floor Work Center & Machine Telemetry
             </span>
           </div>
-          <p style={{ margin: '4px 0 0 0', fontSize: '11px', color: '#94a3b8' }}>
+          <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#64748b' }}>
             Real-time stroke counters, hydraulic pressure monitoring, and operator station allocation.
           </p>
         </div>
@@ -115,13 +116,14 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
             alignItems: 'center',
             gap: '6px',
             padding: '4px 10px',
-            backgroundColor: '#161e2c',
-            border: '1px solid #232d3f',
+            backgroundColor: '#ecfdf5',
+            border: '1px solid #a7f3d0',
             borderRadius: '6px',
             fontSize: '11px',
-            color: '#34d399'
+            fontWeight: 600,
+            color: '#065f46'
           }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', boxShadow: '0 0 8px #10b981' }} />
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block' }} />
             4 Stations Active
           </div>
           <div style={{
@@ -129,11 +131,12 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
             alignItems: 'center',
             gap: '6px',
             padding: '4px 10px',
-            backgroundColor: '#161e2c',
-            border: '1px solid #232d3f',
+            backgroundColor: '#fef3c7',
+            border: '1px solid #fde68a',
             borderRadius: '6px',
             fontSize: '11px',
-            color: '#fbbf24'
+            fontWeight: 600,
+            color: '#92400e'
           }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f59e0b', display: 'inline-block' }} />
             1 Tooling Setup
@@ -158,14 +161,14 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
             <div
               key={st.id}
               style={{
-                backgroundColor: '#121722',
-                border: '1px solid #232d3f',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
                 borderRadius: '8px',
                 padding: '16px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
                 position: 'relative'
               }}
             >
@@ -177,19 +180,19 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                       fontFamily: 'monospace',
                       fontSize: '10px',
                       fontWeight: 700,
-                      backgroundColor: '#1e293b',
-                      color: '#94a3b8',
-                      padding: '2px 5px',
+                      backgroundColor: '#f1f5f9',
+                      color: '#475569',
+                      padding: '2px 6px',
                       borderRadius: '3px'
                     }}>
                       {st.id}
                     </span>
-                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#f8fafc' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>
                       {st.name}
                     </span>
                   </div>
                   <div style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>
-                    {st.model} • <span style={{ color: '#38bdf8' }}>{st.bay}</span>
+                    {st.model} • <span style={{ color: '#0284c7', fontWeight: 600 }}>{st.bay}</span>
                   </div>
                 </div>
 
@@ -199,9 +202,9 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                   fontSize: '10px',
                   fontWeight: 700,
                   letterSpacing: '0.04em',
-                  backgroundColor: st.status === 'RUNNING' ? 'rgba(16, 185, 129, 0.15)' : (st.status === 'TOOLING SETUP' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(100, 116, 139, 0.15)'),
-                  color: st.status === 'RUNNING' ? '#34d399' : (st.status === 'TOOLING SETUP' ? '#fbbf24' : '#94a3b8'),
-                  border: `1px solid ${st.status === 'RUNNING' ? 'rgba(16, 185, 129, 0.3)' : (st.status === 'TOOLING SETUP' ? 'rgba(245, 158, 11, 0.3)' : '#334155')}`
+                  backgroundColor: st.status === 'RUNNING' ? '#ecfdf5' : (st.status === 'TOOLING SETUP' ? '#fef3c7' : '#f1f5f9'),
+                  color: st.status === 'RUNNING' ? '#065f46' : (st.status === 'TOOLING SETUP' ? '#92400e' : '#64748b'),
+                  border: `1px solid ${st.status === 'RUNNING' ? '#a7f3d0' : (st.status === 'TOOLING SETUP' ? '#fde68a' : '#cbd5e1')}`
                 }}>
                   {st.status}
                 </span>
@@ -209,8 +212,8 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
 
               {/* Active Work Order Running */}
               <div style={{
-                backgroundColor: '#161e2c',
-                border: '1px solid #232d3f',
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
                 borderRadius: '6px',
                 padding: '10px 12px',
                 display: 'flex',
@@ -224,40 +227,41 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                       fontFamily: 'monospace',
                       fontSize: '11px',
                       fontWeight: 700,
-                      color: '#f59e0b',
-                      backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                      color: '#b45309',
+                      backgroundColor: '#fef3c7',
                       padding: '1px 6px',
-                      borderRadius: '3px'
+                      borderRadius: '3px',
+                      border: '1px solid #fde68a'
                     }}>
                       {wo.WO_Number}
                     </span>
                   ) : (
-                    <span style={{ fontSize: '10px', color: '#64748b' }}>No WO Clamped</span>
+                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>No WO Clamped</span>
                   )}
                 </div>
 
                 {wo ? (
                   <>
-                    <div style={{ fontSize: '12px', fontWeight: 600, color: '#f1f5f9' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 600, color: '#0f172a' }}>
                       {detail.Material_ID?.name || 'Brake Pedal Bracket Blank'}
                     </div>
 
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', marginBottom: '3px' }}>
-                        <span style={{ color: '#94a3b8', fontFamily: 'monospace' }}>
+                        <span style={{ color: '#64748b', fontFamily: 'monospace' }}>
                           {producedQty.toLocaleString()} / {targetQty.toLocaleString()} pcs
                         </span>
-                        <span style={{ fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace' }}>
+                        <span style={{ fontWeight: 700, color: '#0369a1', fontFamily: 'monospace' }}>
                           {pct.toFixed(0)}%
                         </span>
                       </div>
-                      <div style={{ height: '4px', backgroundColor: '#1e293b', borderRadius: '2px', overflow: 'hidden' }}>
-                        <div style={{ width: `${Math.min(pct, 100)}%`, height: '100%', backgroundColor: '#f59e0b' }} />
+                      <div style={{ height: '5px', backgroundColor: '#e2e8f0', borderRadius: '3px', overflow: 'hidden' }}>
+                        <div style={{ width: `${Math.min(pct, 100)}%`, height: '100%', backgroundColor: '#d97706' }} />
                       </div>
                     </div>
                   </>
                 ) : (
-                  <div style={{ fontSize: '11px', color: '#64748b', fontStyle: 'italic', padding: '6px 0' }}>
+                  <div style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic', padding: '6px 0' }}>
                     Machine idle in standby. Release a work order to clamp die.
                   </div>
                 )}
@@ -268,23 +272,23 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '6px',
-                fontSize: '10px'
+                fontSize: '11px'
               }}>
-                <div style={{ backgroundColor: '#161e2c', padding: '6px', borderRadius: '4px' }}>
-                  <div style={{ color: '#64748b' }}>Cadence</div>
-                  <div style={{ fontWeight: 700, color: '#f8fafc', fontFamily: 'monospace', marginTop: '1px' }}>{st.spm} SPM</div>
+                <div style={{ backgroundColor: '#f8fafc', padding: '6px 8px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                  <div style={{ color: '#64748b', fontSize: '10px' }}>Cadence</div>
+                  <div style={{ fontWeight: 700, color: '#0f172a', fontFamily: 'monospace', marginTop: '1px' }}>{st.spm} SPM</div>
                 </div>
-                <div style={{ backgroundColor: '#161e2c', padding: '6px', borderRadius: '4px' }}>
-                  <div style={{ color: '#64748b' }}>Pressure</div>
-                  <div style={{ fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace', marginTop: '1px' }}>{st.pressure}</div>
+                <div style={{ backgroundColor: '#f8fafc', padding: '6px 8px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                  <div style={{ color: '#64748b', fontSize: '10px' }}>Pressure</div>
+                  <div style={{ fontWeight: 700, color: '#0284c7', fontFamily: 'monospace', marginTop: '1px' }}>{st.pressure}</div>
                 </div>
-                <div style={{ backgroundColor: '#161e2c', padding: '6px', borderRadius: '4px' }}>
-                  <div style={{ color: '#64748b' }}>Temp</div>
-                  <div style={{ fontWeight: 700, color: '#fbbf24', fontFamily: 'monospace', marginTop: '1px' }}>{st.temperature}</div>
+                <div style={{ backgroundColor: '#f8fafc', padding: '6px 8px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                  <div style={{ color: '#64748b', fontSize: '10px' }}>Temp</div>
+                  <div style={{ fontWeight: 700, color: '#b45309', fontFamily: 'monospace', marginTop: '1px' }}>{st.temperature}</div>
                 </div>
-                <div style={{ backgroundColor: '#161e2c', padding: '6px', borderRadius: '4px' }}>
-                  <div style={{ color: '#64748b' }}>OEE</div>
-                  <div style={{ fontWeight: 700, color: '#34d399', fontFamily: 'monospace', marginTop: '1px' }}>{st.oee}</div>
+                <div style={{ backgroundColor: '#f8fafc', padding: '6px 8px', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
+                  <div style={{ color: '#64748b', fontSize: '10px' }}>OEE</div>
+                  <div style={{ fontWeight: 700, color: '#059669', fontFamily: 'monospace', marginTop: '1px' }}>{st.oee}</div>
                 </div>
               </div>
 
@@ -293,11 +297,11 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderTop: '1px solid #1e293b',
+                borderTop: '1px solid #f1f5f9',
                 paddingTop: '10px',
                 marginTop: 'auto'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#94a3b8' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#475569' }}>
                   <User size={13} color="#64748b" />
                   <span>{st.operator}</span>
                 </div>
@@ -308,8 +312,8 @@ const WOMachineStationMonitor = ({ workOrders = [], onUpdateProgress, onOpenTrav
                       onClick={() => onUpdateProgress(wo)}
                       style={{
                         padding: '4px 10px',
-                        backgroundColor: '#f59e0b',
-                        color: '#0b0f17',
+                        backgroundColor: '#d97706',
+                        color: '#ffffff',
                         border: 'none',
                         borderRadius: '4px',
                         fontSize: '11px',
